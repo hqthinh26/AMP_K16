@@ -13,10 +13,9 @@ class _SignInState extends State<SignIn> {
   Future<void> onLogin() async {
     User loginUser = User.login(
         username: usernameController.text, password: passwordController.text);
-    print(
-        'username: ${usernameController.text} - password: ${passwordController.text}');
-    int status = await loginUser.login();
-    print('in sign in.dart - code: $status');
+    print('running');
+    await loginUser.login();
+    print('ended');
   }
 
   @override
