@@ -52,27 +52,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-// new Theme(
-//   data: Theme.of(context).copyWith(
-//     canvasColor: Colors.grey[800],
-//     primaryColor: Colors.red,
-//     textTheme: Theme.of(context).textTheme.copyWith(caption: new TextStyle(color: Colors.yellow)),
-//     child: new BottomNavigationBar(items: navigationBarIcons, backgroundColor: Colors.grey[800],
-//         currentIndex: _currentIndex,
-//         selectedItemColor: Colors.blueAccent,
-//         onTap: (tappedIndex) => {
-//           setState(() => {_currentIndex = tappedIndex})
-//         },)
-//   )
-// )
-
-// BottomNavigationBar(
-//         items: navigationBarIcons,
-//         backgroundColor: Colors.grey[800],
-//         currentIndex: _currentIndex,
-//         selectedItemColor: Colors.blueAccent,
-//         onTap: (tappedIndex) => {
-//           setState(() => {_currentIndex = tappedIndex})
-//         },
-//       )

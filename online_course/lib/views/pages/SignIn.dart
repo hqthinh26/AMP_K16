@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_course/services/User.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -6,6 +7,18 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  Future<void> onLogin() async {
+    User loginUser = User.login(
+        username: usernameController.text, password: passwordController.text);
+    print(
+        'username: ${usernameController.text} - password: ${passwordController.text}');
+    int status = await loginUser.login();
+    print('in sign in.dart - code: $status');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +42,9 @@ class _SignInState extends State<SignIn> {
                     fontWeight: FontWeight.bold, color: Colors.white54),
               ),
             ),
+            //Nhập tài khoản
             TextField(
+                controller: usernameController,
                 style: TextStyle(color: Colors.white),
                 autofocus: true,
                 decoration: InputDecoration(
@@ -42,8 +57,6 @@ class _SignInState extends State<SignIn> {
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-
-                  // hintText: "Tên tài khoản",
                 )),
             Container(
               margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
@@ -53,7 +66,9 @@ class _SignInState extends State<SignIn> {
                     fontWeight: FontWeight.bold, color: Colors.white54),
               ),
             ),
+            //Nhập mật khẩu
             TextField(
+                controller: passwordController,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   fillColor: Colors.grey[800],
@@ -71,16 +86,33 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                //Nút đăng nhập
                 Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                   child: ElevatedButton(
-                    onPressed: () => {Navigator.pushNamed(context, "/home")},
+                    onPressed: onLogin,
+                    // () => {Navigator.pushNamed(context, "/home")},
                     child: Text(
-                      "Sign in",
+                      "SIGN IN",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
+                //Nút tạo tài khoản mới
+                Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pushNamed(context, '/register'),
+                    style: ElevatedButton.styleFrom(
+                        side: BorderSide(width: 1, color: Colors.green),
+                        primary: Colors.green),
+                    child: Text(
+                      "SIGN UP",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                //Nút cần giúp đỡ
                 Container(
                     margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                     child: TextButton(
