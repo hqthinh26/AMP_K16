@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:online_course/pages/SignIn.dart';
-import 'package:online_course/pages/Welcome.dart';
-import 'package:online_course/pages/Helper.dart';
-import 'package:online_course/user/Home.dart';
+import 'package:online_course/views/pages/SignIn.dart';
+import 'package:online_course/views/pages/Welcome.dart';
+import 'package:online_course/views/pages/Helper.dart';
+import 'package:online_course/views/user/Home.dart';
+import 'package:online_course/views/user/Register.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       '/sign_in': (context) => SignIn(),
       '/helper': (context) => Helper(),
       '/home': (context) => Home(),
+      '/register': (context) => Register(),
     });
   }
 }
