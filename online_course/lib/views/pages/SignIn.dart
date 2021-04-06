@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_course/services/User.dart';
+// import 'package:online_course/services/User.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -7,16 +7,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  dynamic usernameController = TextEditingController();
+  dynamic passwordController = TextEditingController();
 
-  Future<void> onLogin() async {
-    User loginUser = User.login(
-        username: usernameController.text, password: passwordController.text);
-    print('running');
-    await loginUser.login();
-    print('ended');
-  }
+  // Future<void> onLogin() async {
+  //   User loginUser = User.login(
+  //       username: usernameController.text, password: passwordController.text);
+  //   print('running');
+  //   await loginUser.login();
+  //   print('ended');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class _SignInState extends State<SignIn> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                   child: ElevatedButton(
-                    onPressed: onLogin,
+                    onPressed: () => {Navigator.pushNamed(context, '/home')},
                     // () => {Navigator.pushNamed(context, "/home")},
                     child: Text(
                       "SIGN IN",

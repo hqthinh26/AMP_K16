@@ -1,8 +1,8 @@
-import 'dart:convert';
+import 'dart:convert' as convert;
 //import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class User {
   String username;
@@ -11,35 +11,69 @@ class User {
   String password;
   Dio _dio;
 
-  User.register({this.username, this.email, this.phone, this.password});
-  User.login({this.username, this.password}) {
+  User.register({this.username, this.email, this.phone, this.password}) {
     BaseOptions baseOption = BaseOptions(
-      //baseUrl: 'https://api.letstudy.org',
+      baseUrl: 'https://api.letstudy.org',
       connectTimeout: 5000,
       receiveTimeout: 3000,
-      contentType: Headers.formUrlEncodedContentType,
       receiveDataWhenStatusError: true,
     );
     this._dio = Dio(baseOption);
   }
 
-  // Future<int> register() async {
-  //   Map<String, String> body = {
-  //     'username': this.username,
-  //     'email': this.email,
-  //     'phone': this.phone,
-  //     'password': this.password
-  //   };
-  //   var url = Uri.parse('https://api.letstudy.org/user/register');
-  //   var response = await http.post(url, body: body);
-  //   if (response.statusCode == 200) {
-  //     return 200;
-  //   } else {
-  //     print(
-  //         'failed at endpoint: /catagory/all- status code: ${response.statusCode}');
-  //     return response.statusCode;
-  //   }
-  // }
+  User.login({this.username, this.password}) {
+    BaseOptions baseOption = BaseOptions(
+      baseUrl: 'https://api.letstudy.org',
+      connectTimeout: 5000,
+      receiveTimeout: 3000,
+      receiveDataWhenStatusError: true,
+      contentType: 'application/json',
+    );
+    this._dio = Dio(baseOption);
+  }
+
+  void _showMaterialDialog(context, errorMessage) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new Text("Thông báo"),
+              content: new Text('${errorMessage['message']}'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
+  }
+
+  Future<void> register(BuildContext context) async {
+    try {
+      Map<String, String> body = {
+        'username': this.username,
+        'email': this.email,
+        'phone': this.phone,
+        'password': this.password
+      };
+      //var url = Uri.parse('https://api.letstudy.org/user/register');
+      var response = await this._dio.post("/user/register", data: body);
+      if (response.statusCode == 200) {
+        print('successful response: $response');
+      } else {
+        print('failed response:  $response');
+      }
+    } on DioError catch (e) {
+      print('alo ${e.response.statusCode}');
+      print('alo2 ${e.response.data}');
+      this._showMaterialDialog(context, e.response.data);
+    }
+  }
 
   Future<void> login() async {
     try {
