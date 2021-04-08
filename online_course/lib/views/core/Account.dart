@@ -17,6 +17,7 @@ class _AccountState extends State<Account> {
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         title: Text("Account"),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
           color: Colors.black,

@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
                   prefixIcon:
                       Icon(Icons.remove_red_eye_sharp, color: Colors.white),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[800]),
+                    borderSide: BorderSide(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5),
                   ),
 
@@ -89,7 +89,8 @@ class _SignInState extends State<SignIn> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                   child: ElevatedButton(
-                    onPressed: () => {Navigator.pushNamed(context, '/home')},
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, '/root_screen')},
                     // () => {Navigator.pushNamed(context, "/home")},
                     child: Text(
                       "SIGN IN",

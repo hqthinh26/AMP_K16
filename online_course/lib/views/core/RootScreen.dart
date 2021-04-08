@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import "./Account.dart";
+import './Account.dart';
+import './Home.dart';
 
-class Home extends StatefulWidget {
+class RootScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _RootScreenState createState() => _RootScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _RootScreenState extends State<RootScreen> {
   int _currentIndex = 0;
+
+  List<Widget> mainScreens = <Widget>[
+    Home(),
+    Center(child: Text("DOWNLOAD")),
+    Center(child: Text("BROWSE")),
+    Center(child: Text("SEARCH")),
+    Account(),
+  ];
 
   List<BottomNavigationBarItem> navigationBarIcons = <BottomNavigationBarItem>[
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
@@ -23,15 +32,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
-      // appBar: AppBar(
-      //   title: Text("React"),
-      //   backgroundColor: Colors.grey[800],
-      //   leading: Text(""),
-      // ),
       body: Container(
         color: Colors.grey[800],
-        child: SafeArea(child: Account()),
+        child: SafeArea(child: mainScreens[_currentIndex]),
       ),
       bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
