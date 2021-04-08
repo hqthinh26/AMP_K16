@@ -39,7 +39,6 @@ class _RegisterState extends State<Register> {
 
   Future<void> onRegister(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      print('Tat ca deu thoa dieu kien');
       User registerUser = User.register(
           username: usernameController.text,
           email: emailController.text,

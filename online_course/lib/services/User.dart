@@ -1,4 +1,4 @@
-import 'dart:convert' as convert;
+// import 'dart:convert' as convert;
 //import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 
 class User {
   String username;
-  String email;
-  String phone;
   String password;
-  Dio _dio;
+  late String email;
+  late String phone;
+  late Dio _dio;
 
-  User.register({this.username, this.email, this.phone, this.password}) {
+  User.register({
+    required this.username,
+    required this.email,
+    required this.phone,
+    required this.password,
+  }) {
     BaseOptions baseOption = BaseOptions(
       baseUrl: 'https://api.letstudy.org',
       connectTimeout: 5000,
@@ -21,7 +26,7 @@ class User {
     this._dio = Dio(baseOption);
   }
 
-  User.login({this.username, this.password}) {
+  User.login({required this.username, required this.password}) {
     BaseOptions baseOption = BaseOptions(
       baseUrl: 'https://api.letstudy.org',
       connectTimeout: 5000,
@@ -69,9 +74,7 @@ class User {
         print('failed response:  $response');
       }
     } on DioError catch (e) {
-      print('alo ${e.response.statusCode}');
-      print('alo2 ${e.response.data}');
-      this._showMaterialDialog(context, e.response.data);
+      this._showMaterialDialog(context, e.response?.data);
     }
   }
 
@@ -91,8 +94,8 @@ class User {
       }
     } on DioError catch (e) {
       if (e.response != null) {
-        print(e.response.data);
-        print(e.response.headers);
+        print(e.response?.data);
+        print(e.response?.headers);
         print(e.message);
       } else {
         print(e.message);

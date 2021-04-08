@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:online_course/views/pages/SignIn.dart';
 import 'package:online_course/views/pages/Welcome.dart';
 import 'package:online_course/views/pages/Helper.dart';
-import 'package:online_course/views/user/Home.dart';
+
+import 'package:online_course/views/user/SignIn.dart';
 import 'package:online_course/views/user/Register.dart';
+
+import 'package:online_course/views/core/RootScreen.dart';
+import 'package:online_course/views/core/Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,8 +20,9 @@ class MyApp extends StatelessWidget {
       '/': (context) => Welcome(),
       '/sign_in': (context) => SignIn(),
       '/helper': (context) => Helper(),
-      '/home': (context) => Home(),
       '/register': (context) => Register(),
+      '/root_screen': (context) => RootScreen(),
+      '/home': (context) => Home(),
     });
   }
 }
