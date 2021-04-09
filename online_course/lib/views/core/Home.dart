@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_course/services/Category.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,6 +7,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<void> getAllCategories() async {
+    try {
+      Category sample = Category();
+      dynamic response = await sample.getAllCategories();
+      print(response);
+    } catch (e) {
+      print('this is error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +30,13 @@ class _HomeState extends State<Home> {
           child: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton(
+                  child: Text("Click me"),
+                  onPressed: () => {getAllCategories()},
+                )
+              ],
             ),
           )),
     );

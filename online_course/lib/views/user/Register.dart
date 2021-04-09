@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/services/User.dart';
 
@@ -38,14 +39,24 @@ class _RegisterState extends State<Register> {
   }
 
   Future<void> onRegister(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      User registerUser = User.register(
-          username: usernameController.text,
-          email: emailController.text,
-          phone: phoneNumberController.text,
-          password: passwordController.text);
+    try {
+      if (_formKey.currentState!.validate()) {
+        User registerUser = User.register(
+            username: usernameController.text,
+            email: emailController.text,
+            phone: phoneNumberController.text,
+            password: passwordController.text);
 
-      await registerUser.register(context);
+        await registerUser.register(context);
+      }
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response?.data);
+        print(e.response?.headers);
+        print(e.message);
+      } else {
+        print(e.message);
+      }
     }
   }
 

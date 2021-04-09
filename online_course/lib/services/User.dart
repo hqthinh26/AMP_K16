@@ -22,6 +22,7 @@ class User {
       connectTimeout: 5000,
       receiveTimeout: 3000,
       receiveDataWhenStatusError: true,
+      contentType: 'application/json',
     );
     this._dio = Dio(baseOption);
   }

@@ -8,7 +8,7 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 4;
 
   List<Widget> mainScreens = <Widget>[
     Home(),

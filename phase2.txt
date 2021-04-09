@@ -1,0 +1,21 @@
+Em xin chào thầy ạ,
+
+Em là Huỳnh Quốc Thịnh - MSSV: 1653081
+
+File này em lưu trong thư mục git - Tên: Phase2
+
+Drive demo: https://drive.google.com/drive/folders/1rI2nyZulkmRpoXRAL_gDtltaXuM6j81i?usp=sharing
+
+Thứ tự demo
+1. Màn hình chào mừng - Đây là nó ạ
+2. Màn hình đăng nhập - Đây là nó ạ. 
+3. Màn hình tạo tài khoản - 
+4. Demo validation các fields (username, email, phone, passwold)
+(Gọi api: https://api.letstudy.org/user/register) 
+Em đã gọi API 
+Sau đây là em tạo tài khoản đã tồn tại
+
+5. Demo màn hình chính (BottomNavigationBar) - Em xin demo
+6. Màn hình thông tin người dùng. - Đây là nó ạ.
+
+Phần tiếp theo, em đang cố gắng hoàn thiện. Em cảm ơn thầy đã xem ạ.
