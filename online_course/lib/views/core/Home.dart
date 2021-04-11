@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/services/Category.dart';
+import 'package:online_course/services/Course.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,10 +12,20 @@ class _HomeState extends State<Home> {
   Future<void> getAllCategories() async {
     try {
       Category sample = Category();
-      dynamic response = await sample.getAllCategories();
+      List<dynamic> response = await sample.getAllCategories();
       print(response);
     } catch (e) {
       print('this is error: $e');
+    }
+  }
+
+  Future<void> getCourses({limit, page}) async {
+    try {
+      Course course = Course();
+      List<dynamic> payload = await course.topSell(limit: limit, page: page);
+      print('this is course payload: $payload');
+    } on DioError catch (e) {
+      print('error happens $e');
     }
   }
 
@@ -34,7 +46,9 @@ class _HomeState extends State<Home> {
               children: [
                 ElevatedButton(
                   child: Text("Click me"),
-                  onPressed: () => {getAllCategories()},
+                  onPressed: () {
+                    getCourses(limit: 10, page: 1);
+                  },
                 )
               ],
             ),

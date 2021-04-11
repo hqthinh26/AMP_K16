@@ -1,25 +1,30 @@
 import 'package:dio/dio.dart';
-//import 'package:flutter/material.dart';
-//import 'dart:convert' as convert;
 
-class Category {
+class Course {
   late Dio _dio;
-  late int category_id;
+  late String id;
+  late int limit;
+  late int page;
 
-  Category() {
-    BaseOptions baseOption = BaseOptions(
+  Course() {
+    BaseOptions baseOptions = BaseOptions(
         contentType: 'application/json',
         baseUrl: 'https://api.letstudy.org',
         connectTimeout: 5000,
         receiveTimeout: 3000,
         receiveDataWhenStatusError: true);
-
-    this._dio = Dio(baseOption);
+    this._dio = Dio(baseOptions);
   }
 
-  Future<List<dynamic>> getAllCategories() async {
+  Future<List<dynamic>> topSell({page, limit}) async {
     try {
-      Response response = await this._dio.get("/category/all");
+      this.page = page;
+      this.limit = limit;
+
+      Response response = await this._dio.post("/course/top-sell", data: {
+        "limit": this.limit,
+        "page": this.page,
+      });
       Map<String, dynamic> data = response.data;
       List<dynamic> payload = data["payload"];
 
@@ -29,10 +34,10 @@ class Category {
         print(e.response?.data);
         print(e.response?.headers);
         print(e.message);
-        throw "fail at get All Category";
+        throw 'alo';
       } else {
         print(e.message);
-        throw "fail at get All Category";
+        throw 'alo2';
       }
     }
   }
