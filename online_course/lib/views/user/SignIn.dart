@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:online_course/services/User.dart';
+import 'package:online_course/services/User.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -7,19 +7,18 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  dynamic usernameController = TextEditingController();
+  dynamic emailController = TextEditingController();
   dynamic passwordController = TextEditingController();
-
-  // Future<void> onLogin() async {
-  //   User loginUser = User.login(
-  //       username: usernameController.text, password: passwordController.text);
-  //   print('running');
-  //   await loginUser.login();
-  //   print('ended');
-  // }
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onLogin() async {
+      User loginUser = User.login(
+          email: emailController.text, password: passwordController.text);
+
+      await loginUser.login(context);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign In"),
@@ -43,7 +42,7 @@ class _SignInState extends State<SignIn> {
             ),
             //Nhập tài khoản
             TextField(
-                controller: usernameController,
+                controller: emailController,
                 style: TextStyle(color: Colors.white),
                 autofocus: true,
                 decoration: InputDecoration(
@@ -89,8 +88,9 @@ class _SignInState extends State<SignIn> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                   child: ElevatedButton(
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, '/root_screen')},
+                    onPressed: () => onLogin(),
+                    // () =>
+                    //     {Navigator.pushNamed(context, '/root_screen')},
                     // () => {Navigator.pushNamed(context, "/home")},
                     child: Text(
                       "SIGN IN",

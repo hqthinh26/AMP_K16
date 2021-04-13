@@ -8,12 +8,15 @@ import 'package:online_course/views/user/Register.dart';
 
 import 'package:online_course/views/core/RootScreen.dart';
 import 'package:online_course/views/core/Home.dart';
+import 'package:dio/dio.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  var dio = Dio();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(initialRoute: '/', routes: {

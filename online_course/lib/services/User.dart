@@ -1,13 +1,13 @@
 // import 'dart:convert' as convert;
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class User {
-  String username;
+  String email;
   String password;
-  late String email;
+  late String username;
   late String phone;
   late Dio _dio;
 
@@ -27,7 +27,7 @@ class User {
     this._dio = Dio(baseOption);
   }
 
-  User.login({required this.username, required this.password}) {
+  User.login({required this.email, required this.password}) {
     BaseOptions baseOption = BaseOptions(
       baseUrl: 'https://api.letstudy.org',
       connectTimeout: 5000,
@@ -43,7 +43,7 @@ class User {
         context: context,
         builder: (_) => new AlertDialog(
               title: new Text("Thông báo"),
-              content: new Text('${errorMessage['message']}'),
+              content: new Text(errorMessage),
               actions: <Widget>[
                 TextButton(
                   child: Text(
@@ -75,15 +75,15 @@ class User {
         print('failed response:  $response');
       }
     } on DioError catch (e) {
-      this._showMaterialDialog(context, e.response?.data);
+      this._showMaterialDialog(context, e.response?.data["message"]);
     }
   }
 
-  Future<void> login() async {
+  Future<void> login(BuildContext context) async {
     try {
       Response response;
       Map<String, dynamic> body = {
-        'username': this.username,
+        'email': this.email,
         'password': this.password,
       };
       response = await this
@@ -91,9 +91,14 @@ class User {
           .post('https://api.letstudy.org/user/login', data: body);
 
       if (response.statusCode == 200) {
-        print(response);
+        Map<String, dynamic> data = response.data;
+        String token = data["token"];
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("url_token", token);
       }
     } on DioError catch (e) {
+      String errorMessage = e.response?.data["message"];
+      this._showMaterialDialog(context, errorMessage);
       if (e.response != null) {
         print(e.response?.data);
         print(e.response?.headers);

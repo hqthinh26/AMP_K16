@@ -9,7 +9,7 @@ class Course {
   Course() {
     BaseOptions baseOptions = BaseOptions(
         contentType: 'application/json',
-        baseUrl: 'https://api.letstudy.org',
+        baseUrl: 'https://api.letstudy.org/course',
         connectTimeout: 5000,
         receiveTimeout: 3000,
         receiveDataWhenStatusError: true);
@@ -21,7 +21,7 @@ class Course {
       this.page = page;
       this.limit = limit;
 
-      Response response = await this._dio.post("/course/top-sell", data: {
+      Response response = await this._dio.post("/top-sell", data: {
         "limit": this.limit,
         "page": this.page,
       });
@@ -30,15 +30,25 @@ class Course {
 
       return payload;
     } on DioError catch (e) {
-      if (e.response != null) {
-        print(e.response?.data);
-        print(e.response?.headers);
-        print(e.message);
-        throw 'alo';
-      } else {
-        print(e.message);
-        throw 'alo2';
-      }
+      throw e;
+    }
+  }
+
+  Future<List<dynamic>> topRate({page, limit}) async {
+    try {
+      this.page = page;
+      this.limit = limit;
+
+      Response response = await this._dio.post("/top-rate", data: {
+        "page": this.page,
+        "limit": this.limit,
+      });
+      Map<String, dynamic> data = response.data;
+      List<dynamic> payload = data["payload"];
+
+      return payload;
+    } on DioError catch (e) {
+      throw e;
     }
   }
 }

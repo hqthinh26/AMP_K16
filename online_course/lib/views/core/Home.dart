@@ -19,13 +19,23 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> getCourses({limit, page}) async {
+  Future<void> getCourseTopSell({limit, page}) async {
     try {
       Course course = Course();
       List<dynamic> payload = await course.topSell(limit: limit, page: page);
       print('this is course payload: $payload');
     } on DioError catch (e) {
       print('error happens $e');
+    }
+  }
+
+  Future<void> getCourseTopRate({limit, page}) async {
+    try {
+      Course course = Course();
+      List<dynamic> payload = await course.topRate(limit: limit, page: page);
+      print('this is topRate: $payload');
+    } on DioError catch (e) {
+      print('$e');
     }
   }
 
@@ -47,7 +57,7 @@ class _HomeState extends State<Home> {
                 ElevatedButton(
                   child: Text("Click me"),
                   onPressed: () {
-                    getCourses(limit: 10, page: 1);
+                    getCourseTopRate(limit: 10, page: 1);
                   },
                 )
               ],
