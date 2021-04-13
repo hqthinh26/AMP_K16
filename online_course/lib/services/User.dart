@@ -2,6 +2,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
+import 'package:online_course/services/DioCustomClass.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -9,7 +10,7 @@ class User {
   String password;
   late String username;
   late String phone;
-  late Dio _dio;
+  late DioCustomClass _dio;
 
   User.register({
     required this.username,
@@ -17,25 +18,11 @@ class User {
     required this.phone,
     required this.password,
   }) {
-    BaseOptions baseOption = BaseOptions(
-      baseUrl: 'https://api.letstudy.org',
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
-      receiveDataWhenStatusError: true,
-      contentType: 'application/json',
-    );
-    this._dio = Dio(baseOption);
+    this._dio = DioCustomClass(route: "/user");
   }
 
   User.login({required this.email, required this.password}) {
-    BaseOptions baseOption = BaseOptions(
-      baseUrl: 'https://api.letstudy.org',
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
-      receiveDataWhenStatusError: true,
-      contentType: 'application/json',
-    );
-    this._dio = Dio(baseOption);
+    this._dio = DioCustomClass(route: "/user");
   }
 
   void _showMaterialDialog(context, errorMessage) {
@@ -68,7 +55,8 @@ class User {
         'password': this.password
       };
       //var url = Uri.parse('https://api.letstudy.org/user/register');
-      var response = await this._dio.post("/user/register", data: body);
+      Dio dioSetter = this._dio.dioGetterSetter;
+      var response = await dioSetter.post("/user/register", data: body);
       if (response.statusCode == 200) {
         print('successful response: $response');
       } else {
@@ -86,18 +74,23 @@ class User {
         'email': this.email,
         'password': this.password,
       };
-      response = await this
-          ._dio
-          .post('https://api.letstudy.org/user/login', data: body);
+
+      Dio dioSetter = this._dio.dioGetterSetter;
+
+      response = await dioSetter.post('https://api.letstudy.org/user/login',
+          data: body);
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
         String token = data["token"];
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString("url_token", token);
+        await prefs.setString("token", token);
+
+        String tokenX = prefs.getString("token") ?? "";
+        print('token is $tokenX');
       }
     } on DioError catch (e) {
-      String errorMessage = e.response?.data["message"];
+      String errorMessage = e.response?.data["message"] ?? "Giá trị rác";
       this._showMaterialDialog(context, errorMessage);
       if (e.response != null) {
         print(e.response?.data);

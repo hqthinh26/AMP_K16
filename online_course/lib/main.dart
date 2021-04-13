@@ -15,8 +15,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  var dio = Dio();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(initialRoute: '/', routes: {
