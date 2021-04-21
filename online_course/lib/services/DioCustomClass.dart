@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DioCustomClass {
   String route;
   late Dio _dio;
-  late String url;
-  late Options? options;
-  late dynamic? data;
-  late Map<String, dynamic>? queryParameters;
+  // late String url;
+  // late Options? options;
+  // late dynamic? data;
+  // late Map<String, dynamic>? queryParameters;
 
   DioCustomClass({required this.route}) {
     BaseOptions baseOption = BaseOptions(

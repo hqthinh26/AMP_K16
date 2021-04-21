@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 
 class Category {
   late Dio _dio;
-  late int category_id;
 
   Category() {
     BaseOptions baseOption = BaseOptions(

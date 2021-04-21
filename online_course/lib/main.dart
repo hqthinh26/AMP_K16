@@ -8,7 +8,6 @@ import 'package:online_course/views/user/Register.dart';
 
 import 'package:online_course/views/core/RootScreen.dart';
 import 'package:online_course/views/core/Home.dart';
-import 'package:dio/dio.dart';
 
 void main() {
   runApp(MyApp());

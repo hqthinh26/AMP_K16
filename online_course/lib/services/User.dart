@@ -5,25 +5,21 @@ import 'package:dio/dio.dart';
 import 'package:online_course/services/DioCustomClass.dart';
 import 'package:flutter/material.dart';
 
-class User {
+class User extends DioCustomClass {
   String email;
   String password;
   late String username;
   late String phone;
-  late DioCustomClass _dio;
 
   User.register({
     required this.username,
     required this.email,
     required this.phone,
     required this.password,
-  }) {
-    this._dio = DioCustomClass(route: "/user");
-  }
+  }) : super(route: "/user");
 
-  User.login({required this.email, required this.password}) {
-    this._dio = DioCustomClass(route: "/user");
-  }
+  User.login({required this.email, required this.password})
+      : super(route: "/user");
 
   void _showMaterialDialog(context, errorMessage) {
     showDialog(
@@ -49,21 +45,26 @@ class User {
   Future<void> register(BuildContext context) async {
     try {
       Map<String, String> body = {
-        'username': this.username,
-        'email': this.email,
-        'phone': this.phone,
-        'password': this.password
+        "username": this.username,
+        "email": this.email,
+        "phone": this.phone,
+        "password": this.password
       };
-      //var url = Uri.parse('https://api.letstudy.org/user/register');
-      Dio dioSetter = this._dio.dioGetterSetter;
-      var response = await dioSetter.post("/user/register", data: body);
+
+      Response response =
+          await this.dioGetterSetter.post("/register", data: body);
       if (response.statusCode == 200) {
-        print('successful response: $response');
+        print("successful response: $response");
       } else {
-        print('failed response:  $response');
+        print("failed response:  $response");
       }
     } on DioError catch (e) {
-      this._showMaterialDialog(context, e.response?.data["message"]);
+      print(e.response?.data);
+      this._showMaterialDialog(
+          context,
+          e.response?.data["message"] == null
+              ? 'Lỗi bất thường'
+              : e.response?.data["message"]);
     }
   }
 
@@ -75,10 +76,9 @@ class User {
         'password': this.password,
       };
 
-      Dio dioSetter = this._dio.dioGetterSetter;
-
-      response = await dioSetter.post('https://api.letstudy.org/user/login',
-          data: body);
+      response = await this
+          .dioGetterSetter
+          .post('https://api.letstudy.org/user/login', data: body);
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
