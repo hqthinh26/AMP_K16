@@ -1,24 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:online_course/services/DioCustomClass.dart';
 //import 'package:flutter/material.dart';
 //import 'dart:convert' as convert;
 
-class Category {
-  late Dio _dio;
-
-  Category() {
-    BaseOptions baseOption = BaseOptions(
-        contentType: 'application/json',
-        baseUrl: 'https://api.letstudy.org',
-        connectTimeout: 5000,
-        receiveTimeout: 3000,
-        receiveDataWhenStatusError: true);
-
-    this._dio = Dio(baseOption);
-  }
+class Category extends DioCustomClass {
+  Category() : super(route: "/category");
 
   Future<List<dynamic>> getAllCategories() async {
     try {
-      Response response = await this._dio.get("/category/all");
+      Response response = await this.dioGetterSetter.get("/all");
       Map<String, dynamic> data = response.data;
       List<dynamic> payload = data["payload"];
 

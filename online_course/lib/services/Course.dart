@@ -1,27 +1,19 @@
 import 'package:dio/dio.dart';
+import './DioCustomClass.dart';
 
-class Course {
-  late Dio _dio;
+class Course extends DioCustomClass {
   late String id;
   late int limit;
   late int page;
 
-  Course() {
-    BaseOptions baseOptions = BaseOptions(
-        contentType: 'application/json',
-        baseUrl: 'https://api.letstudy.org/course',
-        connectTimeout: 5000,
-        receiveTimeout: 3000,
-        receiveDataWhenStatusError: true);
-    this._dio = Dio(baseOptions);
-  }
+  Course() : super(route: "/course");
 
   Future<List<dynamic>> topSell({page, limit}) async {
     try {
       this.page = page;
       this.limit = limit;
 
-      Response response = await this._dio.post("/top-sell", data: {
+      Response response = await this.dioGetterSetter.post("/top-sell", data: {
         "limit": this.limit,
         "page": this.page,
       });
@@ -39,7 +31,7 @@ class Course {
       this.page = page;
       this.limit = limit;
 
-      Response response = await this._dio.post("/top-rate", data: {
+      Response response = await this.dioGetterSetter.post("/top-rate", data: {
         "page": this.page,
         "limit": this.limit,
       });

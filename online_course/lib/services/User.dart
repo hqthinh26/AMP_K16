@@ -6,10 +6,12 @@ import 'package:online_course/services/DioCustomClass.dart';
 import 'package:flutter/material.dart';
 
 class User extends DioCustomClass {
-  String email;
-  String password;
+  String email = "";
+  String password = "";
   late String username;
   late String phone;
+
+  User() : super(route: "/user");
 
   User.register({
     required this.username,
@@ -42,6 +44,24 @@ class User extends DioCustomClass {
             ));
   }
 
+  Future<Map<String, dynamic>> getUserInfo() async {
+    try {
+      Response user = await this.dioGetterSetter.get("/me");
+      Map<String, dynamic> data = user.data;
+      Map<String, dynamic> payload = data["payload"];
+      return payload;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response?.data);
+        print(e.response?.headers);
+        print(e.message);
+      } else {
+        print(e.message);
+      }
+      return {"message": "Lấy thông tin người dùng thất bại"};
+    }
+  }
+
   Future<void> register(BuildContext context) async {
     try {
       Map<String, String> body = {
@@ -68,7 +88,7 @@ class User extends DioCustomClass {
     }
   }
 
-  Future<void> login(BuildContext context) async {
+  Future<bool> login(BuildContext context) async {
     try {
       Response response;
       Map<String, dynamic> body = {
@@ -86,9 +106,9 @@ class User extends DioCustomClass {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", token);
 
-        String tokenX = prefs.getString("token") ?? "";
-        print('token is $tokenX');
+        return true;
       }
+      return false;
     } on DioError catch (e) {
       String errorMessage = e.response?.data["message"] ?? "Giá trị rác";
       this._showMaterialDialog(context, errorMessage);
@@ -99,6 +119,7 @@ class User extends DioCustomClass {
       } else {
         print(e.message);
       }
+      return false;
     }
   }
 }
