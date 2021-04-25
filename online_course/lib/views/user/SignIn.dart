@@ -16,7 +16,11 @@ class _SignInState extends State<SignIn> {
       User loginUser = User.login(
           email: emailController.text, password: passwordController.text);
 
-      await loginUser.login(context);
+      bool status = await loginUser.login(context);
+      if (status) {
+        //Navigator.pushNamed(context, '/root_screen');
+        Navigator.pushNamed(context, '/playground');
+      }
     }
 
     return Scaffold(
