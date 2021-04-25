@@ -5,10 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DioCustomClass {
   String route;
   late Dio _dio;
-  // late String url;
-  // late Options? options;
-  // late dynamic? data;
-  // late Map<String, dynamic>? queryParameters;
 
   DioCustomClass({required this.route}) {
     BaseOptions baseOption = BaseOptions(
@@ -34,8 +30,9 @@ class DioCustomClass {
       RequestOptions options, RequestInterceptorHandler handler) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token") ?? "";
-    options.headers['token'] = token;
-    print('token inside requestInterceptor: $token');
+
+    options.headers['Authorization'] = "Bearer $token";
+
     return handler.next(options);
   }
 
