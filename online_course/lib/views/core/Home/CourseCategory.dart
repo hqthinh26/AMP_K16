@@ -30,12 +30,15 @@ class CourseCategory extends StatefulWidget {
 
 class _CourseCategoryState extends State<CourseCategory> {
   List<Entry> data = <Entry>[];
+  List<Widget> listViews = <Widget>[];
 
   Future<void> getCategories() async {
     Category category = Category();
     List<dynamic> data = await category.getAllCategories();
-    setState(
-        () => {this.data = data.map((item) => Entry(item["name"])).toList()});
+    setState(() {
+      listViews.add(DrawerHeader(child: Text("Danh sách khoá học")));
+      data.forEach((item) => listViews.add(EntryItem(Entry(item["name"]))));
+    });
   }
 
   @override
@@ -47,10 +50,9 @@ class _CourseCategoryState extends State<CourseCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Expanded(
-            child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    EntryItem(data[index]))));
+        child: ListView.builder(
+            itemCount: listViews.length,
+            itemBuilder: (BuildContext context, int index) =>
+                listViews[index]));
   }
 }

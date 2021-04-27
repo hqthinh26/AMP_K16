@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
 import "package:online_course/services/User.dart";
 
-class UserDisplay {}
-
 class Account extends StatefulWidget {
   @override
   _AccountState createState() => _AccountState();
@@ -15,10 +13,28 @@ class _AccountState extends State<Account> {
     "React",
   ];
 
+  String imageURL = "";
+  late String name = "";
+  late String email = "";
+  late List<dynamic> favoriteCategories = [];
+  late String phone = "";
+
   Future<void> getUserInfo() async {
     User user = User();
 
     Map<String, dynamic> result = await user.getUserInfo();
+    this.populateUserInfo(result);
+  }
+
+  void populateUserInfo(apiData) {
+    setState(() {
+      imageURL =
+          "https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png";
+      name = apiData["name"] ?? "Huynh Quoc Thinh";
+      email = apiData["email"] ?? "quocthinh@gmail.com";
+      favoriteCategories = apiData["favoriteCategories"] ?? [];
+      phone = apiData["phone"] ?? "0967897422";
+    });
   }
 
   @override
@@ -49,12 +65,13 @@ class _AccountState extends State<Account> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          'https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png',
+                          this.imageURL,
+                          //'https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png',
                           height: 240.0,
                           width: 160.0,
                         ),
                       ),
-                      Text("Quốc Thịnh - 1653081",
+                      Text(this.email,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
