@@ -32,6 +32,7 @@ class DioCustomClass {
     String token = prefs.getString("token") ?? "";
 
     options.headers['Authorization'] = "Bearer $token";
+    print('token $token');
 
     return handler.next(options);
   }

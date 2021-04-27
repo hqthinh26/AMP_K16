@@ -1,4 +1,7 @@
 import "package:flutter/material.dart";
+import "package:online_course/services/User.dart";
+
+class UserDisplay {}
 
 class Account extends StatefulWidget {
   @override
@@ -11,6 +14,19 @@ class _AccountState extends State<Account> {
     "Python",
     "React",
   ];
+
+  Future<void> getUserInfo() async {
+    User user = User();
+
+    Map<String, dynamic> result = await user.getUserInfo();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
