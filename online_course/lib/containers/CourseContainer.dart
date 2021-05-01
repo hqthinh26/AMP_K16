@@ -4,9 +4,9 @@ class CourseContainer {
   late String subtitle;
   late int price;
   late String description;
-  late List<String> requirement;
+  late List<dynamic> requirement;
 
-  late List<String> learnWhat;
+  late List<dynamic> learnWhat;
   late int soldNumber;
   late int ratedNumber;
   late int videoNumber;
@@ -24,7 +24,7 @@ class CourseContainer {
   late String updatedAt;
   late String instructorId;
   late int typeUploadVideoLesson; //1: "Upload File", 2: "Link Youtube"
-  late List<String> categoryIds;
+  late List<dynamic> categoryIds;
 
   CourseContainer(Map<String, dynamic> courseObject) {
     this.id = courseObject["id"] ?? "testing";
@@ -38,10 +38,10 @@ class CourseContainer {
     this.description = courseObject["description"] ?? "Testing Description";
 
     this.requirement = courseObject["requirement"] ??
-        <String>["requirment_1", "requirement_2"];
+        <dynamic>["requirment_1", "requirement_2"];
 
     this.learnWhat = courseObject["learnWhat"] ??
-        <String>["Coffee", "Green Tea", "Fried Chicken Nugget"];
+        <dynamic>["Coffee", "Green Tea", "Fried Chicken Nugget"];
 
     this.soldNumber = courseObject["soldNumber"] ?? 111;
 
@@ -78,6 +78,6 @@ class CourseContainer {
 
     this.typeUploadVideoLesson = courseObject["typeUploadVideoLesson"] ?? 1;
 
-    this.categoryIds = courseObject["categoryIds"] ?? <String>[];
+    this.categoryIds = courseObject["categoryIds"] ?? <dynamic>[];
   }
 }
