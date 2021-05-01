@@ -69,7 +69,7 @@ class CourseContainer {
 
     this.isHidden = courseObject["isHidden"] ?? false;
 
-    this.createdAt = courseObject["title"] ?? "2021-05-01";
+    this.createdAt = courseObject["createdAt"] ?? "2021-05-01";
 
     this.updatedAt = courseObject["updatedAt"] ?? "2030-01-01";
 
