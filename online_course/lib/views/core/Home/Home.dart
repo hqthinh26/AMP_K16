@@ -14,8 +14,9 @@ class _HomeState extends State<Home> {
     print("I am doing something");
   }
 
-  CourseContainer courseContainer =
-      CourseContainer(<String, dynamic>{"title": "override"});
+  CourseContainer courseContainer = CourseContainer(<String, dynamic>{
+    "title": "overrideoverrideoverrideoverrideoverrideoverride"
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,32 +29,157 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: CourseCategory(),
       ),
-      body: Container(
+      body: SingleChildScrollView(
           //color: Colors.black,
-          child: SafeArea(
+          child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CarouselSlider(
-              options: CarouselOptions(
-                  height: MediaQuery.of(context).size.width / 3),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.blue),
-                      child: InkWell(
-                          onTap: onTapInkWell,
-                          child: MinimizeItem(
-                            courseContainer: courseContainer,
-                          )),
-                    );
-                  },
-                );
-              }).toList(),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    "Các khoá học bán chạy nhất",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        height: MediaQuery.of(context).size.width / 2,
+                        aspectRatio: 16 / 9,
+                        // autoPlay: true,
+                        // autoPlayInterval: Duration(seconds: 2),
+                      ),
+                      items: [1, 2, 3, 4, 5].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width / (1.3),
+                              margin: EdgeInsets.symmetric(horizontal: 1.0),
+                              decoration: BoxDecoration(color: Colors.blue),
+                              child: MinimizeItem(
+                                courseContainer: courseContainer,
+                              ),
+                              // child: InkWell(
+                              //     onTap: onTapInkWell,
+                              //     child: MinimizeItem(
+                              //       courseContainer: courseContainer,
+                              //     )),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Divider(
+                    thickness: 5,
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Các khoá học mới nhất",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        height: MediaQuery.of(context).size.width / 2,
+                        aspectRatio: 16 / 9,
+                        // autoPlay: true,
+                        // autoPlayInterval: Duration(seconds: 2),
+                      ),
+                      items: [1, 2, 3, 4, 5].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width / (1.3),
+                              margin: EdgeInsets.symmetric(horizontal: 1.0),
+                              decoration: BoxDecoration(color: Colors.blue),
+                              child: MinimizeItem(
+                                courseContainer: courseContainer,
+                              ),
+                              // child: InkWell(
+                              //     onTap: onTapInkWell,
+                              //     child: MinimizeItem(
+                              //       courseContainer: courseContainer,
+                              //     )),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Divider(
+                    thickness: 5,
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Các khoá học đánh giá cao nhất",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        height: MediaQuery.of(context).size.width / 2,
+                        aspectRatio: 16 / 9,
+                        // autoPlay: true,
+                        // autoPlayInterval: Duration(seconds: 2),
+                      ),
+                      items: [1, 2, 3, 4, 5].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width / (1.3),
+                              margin: EdgeInsets.symmetric(horizontal: 1.0),
+                              decoration: BoxDecoration(color: Colors.blue),
+                              child: MinimizeItem(
+                                courseContainer: courseContainer,
+                              ),
+                              // child: InkWell(
+                              //     onTap: onTapInkWell,
+                              //     child: MinimizeItem(
+                              //       courseContainer: courseContainer,
+                              //     )),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
