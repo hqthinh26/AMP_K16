@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import './CourseCategory.dart';
 import './Carousel/MinimizeItem.dart';
 import 'package:online_course/containers/CourseContainer.dart';
+import 'package:online_course/services/Course.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,13 +11,38 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Iterable<CourseContainer> topNew = <CourseContainer>[];
+  Iterable<CourseContainer> topSell = <CourseContainer>[];
+  Iterable<CourseContainer> topRate = <CourseContainer>[];
+
   void onTapInkWell() {
     print("I am doing something");
   }
 
-  CourseContainer courseContainer = CourseContainer(<String, dynamic>{
-    "title": "overrideoverrideoverrideoverrideoverrideoverride"
-  });
+  @override
+  void initState() {
+    super.initState();
+    this.getThreeTypeOfCourses();
+  }
+
+  Future<void> getThreeTypeOfCourses() async {
+    Course course = Course();
+
+    Iterable<CourseContainer> topNewCourses =
+        await course.topNew(page: 1, limit: 10);
+
+    Iterable<CourseContainer> topSellCourses =
+        await course.topSell(page: 1, limit: 10);
+
+    Iterable<CourseContainer> topRateCourses =
+        await course.topRate(page: 1, limit: 10);
+
+    setState(() {
+      topNew = topNewCourses;
+      topSell = topSellCourses;
+      topRate = topRateCourses;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +69,7 @@ class _HomeState extends State<Home> {
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    "Các khoá học bán chạy nhất",
+                    "Các khoá học bán chạy nhất", //Top Sell
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -59,21 +85,21 @@ class _HomeState extends State<Home> {
                         // autoPlay: true,
                         // autoPlayInterval: Duration(seconds: 2),
                       ),
-                      items: [1, 2, 3, 4, 5].map((i) {
+                      items: this.topSell.map((course) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              child: MinimizeItem(
-                                courseContainer: courseContainer,
-                              ),
-                              // child: InkWell(
-                              //     onTap: onTapInkWell,
-                              //     child: MinimizeItem(
-                              //       courseContainer: courseContainer,
-                              //     )),
+                              // child: MinimizeItem(
+                              //   courseContainer: course,
+                              // ),
+                              child: InkWell(
+                                  onTap: onTapInkWell,
+                                  child: MinimizeItem(
+                                    courseContainer: course,
+                                  )),
                             );
                           },
                         );
@@ -92,7 +118,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Các khoá học mới nhất",
+                    "Các khoá học mới nhất", //top-new
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -108,21 +134,21 @@ class _HomeState extends State<Home> {
                         // autoPlay: true,
                         // autoPlayInterval: Duration(seconds: 2),
                       ),
-                      items: [1, 2, 3, 4, 5].map((i) {
+                      items: this.topNew.map((course) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              child: MinimizeItem(
-                                courseContainer: courseContainer,
-                              ),
-                              // child: InkWell(
-                              //     onTap: onTapInkWell,
-                              //     child: MinimizeItem(
-                              //       courseContainer: courseContainer,
-                              //     )),
+                              // child: MinimizeItem(
+                              //   courseContainer: course,
+                              // ),
+                              child: InkWell(
+                                  onTap: onTapInkWell,
+                                  child: MinimizeItem(
+                                    courseContainer: course,
+                                  )),
                             );
                           },
                         );
@@ -157,21 +183,21 @@ class _HomeState extends State<Home> {
                         // autoPlay: true,
                         // autoPlayInterval: Duration(seconds: 2),
                       ),
-                      items: [1, 2, 3, 4, 5].map((i) {
+                      items: this.topRate.map((course) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              child: MinimizeItem(
-                                courseContainer: courseContainer,
-                              ),
-                              // child: InkWell(
-                              //     onTap: onTapInkWell,
-                              //     child: MinimizeItem(
-                              //       courseContainer: courseContainer,
-                              //     )),
+                              // child: MinimizeItem(
+                              //   courseContainer: course,
+                              // ),
+                              child: InkWell(
+                                  onTap: onTapInkWell,
+                                  child: MinimizeItem(
+                                    courseContainer: course,
+                                  )),
                             );
                           },
                         );
