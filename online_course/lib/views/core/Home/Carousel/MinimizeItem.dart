@@ -36,8 +36,9 @@ class _MinimizeItemState extends State<MinimizeItem> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 5),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Text(
                     widget.courseContainer.title,
                     overflow: TextOverflow.ellipsis,
@@ -48,47 +49,60 @@ class _MinimizeItemState extends State<MinimizeItem> {
                         fontFamily: "Fira"),
                   ),
                 ),
+                SizedBox(height: 5),
                 Expanded(
-                  flex: 1,
-                  child: Text(
-                    widget.courseContainer.subtitle,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Fira"),
+                  flex: 2,
+                  child: Container(
+                    //color: Colors.blue,
+                    child: Text(
+                      widget.courseContainer.subtitle,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.black,
+                          //fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: "Fira"),
+                    ),
                   ),
                 ),
                 Expanded(
-                    flex: 1,
-                    child: RatingBar.builder(
-                        ignoreGestures: true,
-                        initialRating:
-                            widget.courseContainer.ratedNumber.toDouble(),
-                        itemSize: 17,
-                        itemBuilder: (contexPt, _) =>
-                            Icon(Icons.star, color: Colors.amber[200]),
-                        onRatingUpdate: (updatedStar) =>
-                            {print("updated start $updatedStar")})),
-                Expanded(
-                    flex: 1,
-                    child: Text(
-                      "(${widget.courseContainer.soldNumber})",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Fira"),
+                    flex: 2,
+                    child: Container(
+                      //color: Colors.red,
+                      child: Row(
+                        children: [
+                          RatingBar.builder(
+                              ignoreGestures: true,
+                              initialRating:
+                                  widget.courseContainer.ratedNumber.toDouble(),
+                              itemSize: 17,
+                              itemBuilder: (contexPt, _) =>
+                                  Icon(Icons.star, color: Colors.amber[200]),
+                              onRatingUpdate: (updatedStar) =>
+                                  {print("updated start $updatedStar")}),
+                          Text(
+                            "(Đã bán: ${widget.courseContainer.soldNumber})",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Fira",
+                                fontStyle: FontStyle.italic),
+                          )
+                        ],
+                      ),
                     )),
+                SizedBox(height: 5),
                 Expanded(
-                    flex: 1,
+                    flex: 3,
                     child: Text(
-                      "${widget.courseContainer.price} VNĐ",
+                      "${widget.courseContainer.price}đ",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.red,
                           fontWeight: FontWeight.bold,
-                          fontFamily: "Fira"),
+                          fontFamily: "Fira",
+                          fontSize: 18),
                     ))
               ],
             ),

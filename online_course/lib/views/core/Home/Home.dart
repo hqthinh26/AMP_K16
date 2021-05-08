@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import './CourseCategory.dart';
-import './Carousel/MinimizeItem.dart';
 import 'package:online_course/containers/CourseContainer.dart';
 import 'package:online_course/services/Course.dart';
+
+import './Carousel/MinimizeItem.dart';
+import "./Carousel/FullItem.dart";
 
 class Home extends StatefulWidget {
   @override
@@ -74,13 +76,14 @@ class _HomeState extends State<Home> {
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        fontStyle: FontStyle.italic),
+                        //fontStyle: FontStyle.italic,
+                        fontFamily: "Fira"),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 20),
                   Container(
                     child: CarouselSlider(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.width / 1.5,
                         aspectRatio: 16 / 9,
                         // autoPlay: true,
                         // autoPlayInterval: Duration(seconds: 2),
@@ -92,14 +95,18 @@ class _HomeState extends State<Home> {
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              // child: MinimizeItem(
-                              //   courseContainer: course,
-                              // ),
                               child: InkWell(
-                                  onTap: onTapInkWell,
-                                  child: MinimizeItem(
-                                    courseContainer: course,
-                                  )),
+                                child: MinimizeItem(
+                                  courseContainer: course,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => FullItem(
+                                              courseContainer: course)));
+                                },
+                              ),
                             );
                           },
                         );
@@ -117,22 +124,24 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //SizedBox(height: 20),
                   Text(
                     "Các khoá học mới nhất", //top-new
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        fontStyle: FontStyle.italic),
+                        //fontStyle: FontStyle.italic,
+                        fontFamily: "Fira"),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 20),
                   Container(
                     child: CarouselSlider(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.width / 1.5,
                         aspectRatio: 16 / 9,
                         // autoPlay: true,
-                        // autoPlayInterval: Duration(seconds: 2),
+                        // autoPlayInterval: Duration(seconds: 4),
                       ),
                       items: this.topNew.map((course) {
                         return Builder(
@@ -141,9 +150,6 @@ class _HomeState extends State<Home> {
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              // child: MinimizeItem(
-                              //   courseContainer: course,
-                              // ),
                               child: InkWell(
                                   onTap: onTapInkWell,
                                   child: MinimizeItem(
@@ -166,22 +172,24 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //SizedBox(height: 20),
                   Text(
                     "Các khoá học đánh giá cao nhất",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        fontStyle: FontStyle.italic),
+                        //fontStyle: FontStyle.italic,
+                        fontFamily: "Fira"),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 20),
                   Container(
                     child: CarouselSlider(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.width / 1.5,
                         aspectRatio: 16 / 9,
                         // autoPlay: true,
-                        // autoPlayInterval: Duration(seconds: 2),
+                        // autoPlayInterval: Duration(seconds: 6),
                       ),
                       items: this.topRate.map((course) {
                         return Builder(
@@ -190,9 +198,6 @@ class _HomeState extends State<Home> {
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
                               decoration: BoxDecoration(color: Colors.blue),
-                              // child: MinimizeItem(
-                              //   courseContainer: course,
-                              // ),
                               child: InkWell(
                                   onTap: onTapInkWell,
                                   child: MinimizeItem(
