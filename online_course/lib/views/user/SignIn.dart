@@ -19,7 +19,10 @@ class _SignInState extends State<SignIn> {
       bool status = await loginUser.login(context);
       if (status) {
         //Navigator.pushNamed(context, '/root_screen');
-        Navigator.pushNamed(context, '/root_screen');
+        Navigator.pushNamed(
+          context,
+          '/root_screen',
+        );
       }
     }
 
