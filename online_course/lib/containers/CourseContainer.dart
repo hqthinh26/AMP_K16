@@ -25,6 +25,13 @@ class CourseContainer {
   late String instructorId;
   late int typeUploadVideoLesson; //1: "Upload File", 2: "Link Youtube"
   late List<dynamic> categoryIds;
+  late String instructorUserId;
+  late String instructorUserName;
+
+  @override
+  String toString() {
+    return "${this.title} - ${this.instructorId} - ${this.instructorUserName}";
+  }
 
   CourseContainer(Map<String, dynamic> courseObject) {
     this.id = courseObject["id"] ?? "testing";
@@ -79,5 +86,9 @@ class CourseContainer {
     this.typeUploadVideoLesson = courseObject["typeUploadVideoLesson"] ?? 1;
 
     this.categoryIds = courseObject["categoryIds"] ?? <dynamic>[];
+
+    this.instructorUserId = courseObject["instructor.user.id"] ?? "";
+
+    this.instructorUserName = courseObject["instructor.user.name"] ?? "";
   }
 }
