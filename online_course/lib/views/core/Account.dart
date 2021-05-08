@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+
 import "package:online_course/services/User.dart";
+import "package:online_course/containers/UserContainer.dart";
 
 class Account extends StatefulWidget {
   @override
@@ -7,39 +9,13 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  // List<String> chipMessages = <String>[
-  //   "JavaScript",
-  //   "Python",
-  //   "React",
-  // ];
-
-  String imageURL = "";
-  late String name = "";
-  late String email = "";
-  late List<dynamic> favoriteCategories = [
-    "JavaScript",
-    "Python",
-    "React",
-  ];
-  late String phone = "";
+  UserContainer userContainer = UserContainer({"favoriteCategories": []});
 
   Future<void> getUserInfo() async {
     User user = User();
-
     Map<String, dynamic> result = await user.getUserInfo();
-    this.populateUserInfo(result);
-  }
-
-  void populateUserInfo(apiData) {
-    setState(() {
-      imageURL =
-          "https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png";
-      name = apiData["name"] ?? "Huynh Quoc Thinh";
-      email = apiData["email"] ?? "quocthinh@gmail.com";
-      favoriteCategories = apiData["favoriteCategories"] ?? [];
-      phone = apiData["phone"] ?? "0967897422";
-      favoriteCategories = <dynamic>["JavaScript", "Python", "React", "Monkey"];
-    });
+    UserContainer data = UserContainer(result);
+    setState(() => userContainer = data);
   }
 
   @override
@@ -71,13 +47,19 @@ class _AccountState extends State<Account> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            this.imageURL,
+                            '${this.userContainer.avatar}',
                             //'https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png',
                             height: 240.0,
                             width: 160.0,
                           ),
                         ),
-                        Text(this.email,
+                        Text(this.userContainer.id,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            )),
+                        Text(this.userContainer.email,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -105,7 +87,10 @@ class _AccountState extends State<Account> {
                           Wrap(
                             direction: Axis.horizontal,
                             spacing: 5,
-                            children: favoriteCategories.map((item) {
+                            children: this
+                                .userContainer
+                                .favoriteCategories
+                                .map((item) {
                               return Chip(
                                 backgroundColor: Colors.grey[400],
                                 avatar:
