@@ -28,6 +28,7 @@ class _VideoPlayerState extends State<VideoPlayerCustom> {
       videoPlayerController: _videoPlayerController,
       autoPlay: false,
       autoInitialize: true,
+      aspectRatio: 16 / 9,
       // looping: true
     );
     setState(() {});

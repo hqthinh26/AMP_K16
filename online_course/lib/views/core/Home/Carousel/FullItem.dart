@@ -145,12 +145,35 @@ class _FullItemState extends State<FullItem> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
                 SizedBox(
                   height: 200,
+                  width: double.infinity,
                   child: VideoPlayerCustom(
                     promoVidUrl: widget.courseContainer.promoVidUrl,
                   ),
+                  // child: Container(
+                  //   color: Colors.red,
+                  // )
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Khoá học này bao gồm: ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                //   children: [
+                //     Icon(
+                //       Icons.video_library,
+                //       color: Colors.black,
+                //     ),
+                //     //Text("  ${widget.courseContainer.totalHours} giờ")
+                //   ],
+                // ),
               ],
             )),
       ),
