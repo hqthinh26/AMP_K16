@@ -145,11 +145,12 @@ class _FullItemState extends State<FullItem> {
                     ),
                   ],
                 ),
-                Container(
+                SizedBox(
+                  height: 200,
                   child: VideoPlayerCustom(
                     promoVidUrl: widget.courseContainer.promoVidUrl,
                   ),
-                )
+                ),
               ],
             )),
       ),

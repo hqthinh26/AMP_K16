@@ -18,14 +18,20 @@ class UserContainer {
     this.avatar = user["avatar"] ?? "";
     this.name = user[""] ?? "huynh quoc thinh";
     print('user: $user');
-    this.favoriteCategories = user["favoriteCategories"].isNotEmpty
-        ? user["favoriteCategories"]
-        : <dynamic>[
+    this.favoriteCategories = user["favoriteCategories"] == null
+        ? <dynamic>[
             "JavaScript",
             "Python",
             "React",
-          ];
-    //this.favoriteCategories = [];
+          ]
+        : user["favoriteCategories"].isEmpty
+            ? <dynamic>[
+                "JavaScript",
+                "Python",
+                "React",
+                "ALoo",
+              ]
+            : user["favoriteCategories"];
     this.point = user["point"] ?? 0;
     this.phone = user["phone"] ?? "096 789 7422";
     this.type = user["type"] ?? "";
