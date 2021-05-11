@@ -18,6 +18,11 @@ class _FullItemState extends State<FullItem> {
     return monthYear;
   }
 
+  String roundNumberTo1Decimal(double x) {
+    String rounded = x.toStringAsPrecision(1);
+    return rounded;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,7 +153,6 @@ class _FullItemState extends State<FullItem> {
                 SizedBox(height: 20),
                 SizedBox(
                   height: 200,
-                  width: double.infinity,
                   child: VideoPlayerCustom(
                     promoVidUrl: widget.courseContainer.promoVidUrl,
                   ),
@@ -159,21 +163,136 @@ class _FullItemState extends State<FullItem> {
                 SizedBox(
                   height: 20,
                 ),
+                Text("đ${widget.courseContainer.price}",
+                    style: TextStyle(
+                        fontSize: 34, fontFamily: "Fira", color: Colors.red)),
+                ElevatedButton(
+                  child: Text("Mua ngay"),
+                  onPressed: () => {},
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
-                  "Khoá học này bao gồm: ",
+                  "Khoá học này bao gồm ",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   crossAxisAlignment: CrossAxisAlignment.stretch,
-                //   children: [
-                //     Icon(
-                //       Icons.video_library,
-                //       color: Colors.black,
-                //     ),
-                //     //Text("  ${widget.courseContainer.totalHours} giờ")
-                //   ],
-                // ),
+                Container(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.video_library,
+                          color: Colors.red,
+                        ),
+                        Text(
+                            "  Thời gian: ${widget.courseContainer.totalHours.toStringAsFixed(1)} Giờ"),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.movie,
+                          color: Colors.blue,
+                        ),
+                        Text(
+                            "  Bài giảng: ${widget.courseContainer.videoNumber} bài"),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.approval,
+                          color: Colors.green[200],
+                        ),
+                        Text("  Nhận chứng chỉ hoàn thành khoá học"),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.all_inclusive,
+                          color: Colors.grey,
+                        ),
+                        Text("  Mua 1 lần cho mãi mãi"),
+                      ],
+                    ),
+                  ],
+                )),
+                SizedBox(height: 30),
+                Container(
+                    color: Colors.grey[200],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Bạn sẽ học được",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Column(
+                          children: widget.courseContainer.learnWhat
+                              .map((item) => ListTile(
+                                    leading:
+                                        Icon(Icons.check, color: Colors.green),
+                                    title: Text("$item"),
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    )),
+                SizedBox(height: 30),
+                Container(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Mô tả khoá học",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "${widget.courseContainer.description}",
+                      style: TextStyle(fontSize: 16),
+                    )
+                  ],
+                )),
+                SizedBox(height: 30),
+                Container(
+                    color: Colors.grey[200],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Yêu cầu của khoá học",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Column(
+                          children: widget.courseContainer.requirement
+                              .map((item) => ListTile(
+                                    leading: Icon(
+                                      Icons.fiber_manual_record,
+                                      color: Colors.green,
+                                    ),
+                                    title: Text("$item"),
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    )),
+                SizedBox(height: 40),
               ],
             )),
       ),
