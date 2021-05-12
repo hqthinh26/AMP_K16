@@ -31,7 +31,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
         Flexible(
           flex: 1,
           child: Container(
-            color: Colors.white,
+            color: Colors.black,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +43,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                     widget.courseContainer.title,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         fontFamily: "Fira"),
@@ -58,7 +58,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                       widget.courseContainer.subtitle,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           //fontWeight: FontWeight.bold,
                           fontSize: 13,
                           fontFamily: "Fira"),
@@ -72,19 +72,21 @@ class _MinimizeItemState extends State<MinimizeItem> {
                       child: Row(
                         children: [
                           RatingBar.builder(
-                              ignoreGestures: true,
-                              initialRating:
-                                  widget.courseContainer.ratedNumber.toDouble(),
-                              itemSize: 17,
-                              itemBuilder: (contexPt, _) =>
-                                  Icon(Icons.star, color: Colors.amber[200]),
-                              onRatingUpdate: (updatedStar) =>
-                                  {print("updated start $updatedStar")}),
+                            ignoreGestures: true,
+                            initialRating:
+                                widget.courseContainer.ratedNumber.toDouble(),
+                            itemSize: 17,
+                            itemBuilder: (contexPt, _) =>
+                                Icon(Icons.star, color: Colors.amber[200]),
+                            onRatingUpdate: (updatedStar) =>
+                                {print("updated start $updatedStar")},
+                            unratedColor: Colors.grey[800],
+                          ),
                           Text(
                             "(Đã bán: ${widget.courseContainer.soldNumber})",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.yellow,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Fira",
                                 fontStyle: FontStyle.italic),
@@ -99,7 +101,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                       "${widget.courseContainer.price}đ",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: Colors.red,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontFamily: "Fira",
                           fontSize: 18),

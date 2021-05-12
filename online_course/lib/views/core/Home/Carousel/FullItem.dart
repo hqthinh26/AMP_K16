@@ -27,12 +27,13 @@ class _FullItemState extends State<FullItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.black,
         title: Text("Thông tin khoá học"),
       ),
       body: SingleChildScrollView(
         child: Container(
             padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+            color: Colors.black,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,7 +42,7 @@ class _FullItemState extends State<FullItem> {
                   widget.courseContainer.title,
                   //overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -51,7 +52,7 @@ class _FullItemState extends State<FullItem> {
                   widget.courseContainer.subtitle,
                   //overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     //fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -62,7 +63,7 @@ class _FullItemState extends State<FullItem> {
                     children: [
                       Text("${widget.courseContainer.ratedNumber}",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           )),
@@ -81,7 +82,7 @@ class _FullItemState extends State<FullItem> {
                         "(Đã bán: ${widget.courseContainer.soldNumber})",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Colors.red,
+                            color: Colors.yellow,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
                       )
@@ -94,14 +95,14 @@ class _FullItemState extends State<FullItem> {
                     Text(
                       "Giảng viên:",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       " ${widget.courseContainer.instructorUserName}",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.blue[200],
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -117,9 +118,11 @@ class _FullItemState extends State<FullItem> {
                     Text(
                       "  Lần cuối cập nhật: ",
                       //style: TextStyle(fontWeight: FontWeight.w600),
+                      style: TextStyle(color: Colors.white),
                     ),
                     Text(
                       this.formatTimestamptz(widget.courseContainer.updatedAt),
+                      style: TextStyle(color: Colors.white),
                       //style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ],
@@ -133,6 +136,7 @@ class _FullItemState extends State<FullItem> {
                     ),
                     Text(
                       "  Tiếng việt",
+                      style: TextStyle(color: Colors.white),
                       //style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ],
@@ -142,10 +146,11 @@ class _FullItemState extends State<FullItem> {
                   children: [
                     Icon(
                       Icons.closed_caption_off,
-                      color: Colors.black,
+                      color: Colors.greenAccent,
                     ),
                     Text(
                       "  Tiếng việt [Mặc định]",
+                      style: TextStyle(color: Colors.white),
                       //style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ],
@@ -165,7 +170,7 @@ class _FullItemState extends State<FullItem> {
                 ),
                 Text("đ${widget.courseContainer.price}",
                     style: TextStyle(
-                        fontSize: 34, fontFamily: "Fira", color: Colors.red)),
+                        fontSize: 34, fontFamily: "Fira", color: Colors.white)),
                 ElevatedButton(
                   child: Text("Mua ngay"),
                   onPressed: () => {},
@@ -175,7 +180,10 @@ class _FullItemState extends State<FullItem> {
                 ),
                 Text(
                   "Khoá học này bao gồm ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white),
                 ),
                 Container(
                     child: Column(
@@ -190,7 +198,9 @@ class _FullItemState extends State<FullItem> {
                           color: Colors.red,
                         ),
                         Text(
-                            "  Thời gian: ${widget.courseContainer.totalHours.toStringAsFixed(1)} Giờ"),
+                          "  Thời gian: ${widget.courseContainer.totalHours.toStringAsFixed(1)} Giờ",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -201,7 +211,9 @@ class _FullItemState extends State<FullItem> {
                           color: Colors.blue,
                         ),
                         Text(
-                            "  Bài giảng: ${widget.courseContainer.videoNumber} bài"),
+                          "  Bài giảng: ${widget.courseContainer.videoNumber} bài",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -209,41 +221,50 @@ class _FullItemState extends State<FullItem> {
                       children: [
                         Icon(
                           Icons.approval,
-                          color: Colors.green[200],
+                          color: Colors.greenAccent,
                         ),
-                        Text("  Nhận chứng chỉ hoàn thành khoá học"),
+                        Text(
+                          "  Nhận chứng chỉ hoàn thành khoá học",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Row(
                       children: [
-                        Icon(
-                          Icons.all_inclusive,
-                          color: Colors.grey,
+                        Icon(Icons.all_inclusive, color: Colors.yellowAccent),
+                        Text(
+                          "  Mua 1 lần cho mãi mãi",
+                          style: TextStyle(color: Colors.white),
                         ),
-                        Text("  Mua 1 lần cho mãi mãi"),
                       ],
                     ),
                   ],
                 )),
                 SizedBox(height: 30),
                 Container(
-                    color: Colors.grey[200],
+                    color: Colors.grey[850],
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        SizedBox(height: 10),
                         Text(
                           "Bạn sẽ học được",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                         Column(
                           children: widget.courseContainer.learnWhat
                               .map((item) => ListTile(
                                     leading:
-                                        Icon(Icons.check, color: Colors.green),
-                                    title: Text("$item"),
+                                        Icon(Icons.check, color: Colors.white),
+                                    title: Text(
+                                      "$item",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ))
                               .toList(),
                         ),
@@ -257,36 +278,44 @@ class _FullItemState extends State<FullItem> {
                   children: [
                     Text(
                       "Mô tả khoá học",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     SizedBox(height: 10),
                     Text(
                       "${widget.courseContainer.description}",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     )
                   ],
                 )),
                 SizedBox(height: 30),
                 Container(
-                    color: Colors.grey[200],
+                    color: Colors.grey[850],
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        SizedBox(height: 10),
                         Text(
                           "Yêu cầu của khoá học",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                         Column(
                           children: widget.courseContainer.requirement
                               .map((item) => ListTile(
                                     leading: Icon(
                                       Icons.fiber_manual_record,
-                                      color: Colors.green,
+                                      color: Colors.white,
                                     ),
-                                    title: Text("$item"),
+                                    title: Text(
+                                      "$item",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ))
                               .toList(),
                         ),

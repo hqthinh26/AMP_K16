@@ -6,6 +6,7 @@ class Course extends DioCustomClass {
   late String id;
   late int limit;
   late int page;
+  late String keyword;
 
   Course() : super(route: "/course");
 
@@ -80,4 +81,6 @@ class Course extends DioCustomClass {
       return throw e;
     }
   }
+
+  //Danh sách khoá học the keyword
 }

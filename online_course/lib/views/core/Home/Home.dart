@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.black,
         title: Text("HOME"),
         //automaticallyImplyLeading: false,
       ),
@@ -58,8 +58,8 @@ class _HomeState extends State<Home> {
         child: CourseCategory(),
       ),
       body: SingleChildScrollView(
-          //color: Colors.black,
           child: Container(
+        color: Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                   Text(
                     "Các khoá học bán chạy nhất", //Top Sell
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         //fontStyle: FontStyle.italic,
@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
                   Text(
                     "Các khoá học mới nhất", //top-new
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         //fontStyle: FontStyle.italic,
@@ -176,7 +176,7 @@ class _HomeState extends State<Home> {
                   Text(
                     "Các khoá học đánh giá cao nhất",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         //fontStyle: FontStyle.italic,
