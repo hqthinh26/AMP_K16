@@ -7,6 +7,7 @@ class Course extends DioCustomClass {
   late int limit;
   late int page;
   late String keyword;
+  late int offset;
 
   Course() : super(route: "/course");
 
@@ -51,10 +52,6 @@ class Course extends DioCustomClass {
       } else {
         return <CourseContainer>[];
       }
-
-      // return payload.isEmpty
-      //     ?
-      //     : payload.map((item) => CourseContainer(item));
     } on DioError catch (e) {
       return throw e;
     }
@@ -79,6 +76,37 @@ class Course extends DioCustomClass {
       }
     } on DioError catch (e) {
       return throw e;
+    }
+  }
+
+  Future<Iterable<CourseContainer>> searchedCourses({String keyword = "", int limit = 10, int offset = 0, String? category}) async {
+    try {
+      this.keyword = keyword;
+      this.limit = limit;
+      this.offset = offset;
+      
+      Map<String, dynamic> data = {
+        "keyword": this.keyword,
+        "opt": {
+          "sort": {
+            "attribute": "price",
+            "rule": "ASC",
+          },
+          "category": [],
+        },
+        "limit": this.limit,
+        "offset": this.offset,
+      };
+      Response response = await this.dioGetterSetter.post("/search", data: data);
+      Map<String, dynamic> result = response.data;
+      List<dynamic> rows = result["payload"]["rows"];
+      if (rows.length > 0) {
+        return rows.map((item) => CourseContainer(item));
+      } else {
+        return <CourseContainer> [];
+      }
+    } on DioError catch (e) {
+      throw e;
     }
   }
 
