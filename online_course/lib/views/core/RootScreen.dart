@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './Account.dart';
-import 'Home/Home.dart';
+import './Home/Home.dart';
+import "./Search/Search.dart";
 
 class RootScreen extends StatefulWidget {
   @override
@@ -12,19 +13,19 @@ class _RootScreenState extends State<RootScreen> {
 
   List<Widget> mainScreens = <Widget>[
     Home(),
+    Search(),
     Center(child: Text("DOWNLOAD")),
     Center(child: Text("BROWSE")),
-    Center(child: Text("SEARCH")),
     Account(),
   ];
 
   List<BottomNavigationBarItem> navigationBarIcons = <BottomNavigationBarItem>[
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.download_done_sharp), label: "Downloads"),
+    BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
     BottomNavigationBarItem(
         icon: Icon(Icons.stacked_bar_chart), label: "Browse"),
-    BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.download_done_sharp), label: "Downloads"),
     BottomNavigationBarItem(
         icon: Icon(Icons.account_circle_sharp), label: "Account")
   ];
@@ -33,7 +34,7 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.grey[800],
+        color: Colors.black,
         child: SafeArea(child: mainScreens[_currentIndex]),
       ),
       bottomNavigationBar: new Theme(
