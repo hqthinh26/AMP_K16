@@ -28,7 +28,7 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.black,
         title: Text("Account"),
         automaticallyImplyLeading: false,
       ),

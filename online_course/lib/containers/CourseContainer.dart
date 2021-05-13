@@ -7,13 +7,14 @@ class CourseContainer {
   late List<dynamic> requirement;
 
   late List<dynamic> learnWhat;
+  late double star;
   late int soldNumber;
   late int ratedNumber;
   late int videoNumber;
   late dynamic totalHours;
-  late dynamic fomalityPoint;
-  late dynamic contentPoint;
-  late dynamic presentationPoint;
+  dynamic formalityPoint = 0;
+  dynamic contentPoint = 0;
+  dynamic presentationPoint = 0;
   late String imageUrl;
   late String promoVidUrl;
   late String status; //Either: "PENDING" or "COMPLETE"
@@ -58,12 +59,16 @@ class CourseContainer {
 
     this.totalHours = courseObject["totalHours"] ?? -100;
 
-    this.fomalityPoint = courseObject["fomalityPoint"] ?? -100;
+    this.formalityPoint = courseObject["formalityPoint"];
 
-    this.contentPoint = courseObject["contentPoint"] ?? -100;
+    this.contentPoint = courseObject["contentPoint"];
 
-    this.presentationPoint = courseObject["presentationPoint"] ?? -100;
+    this.presentationPoint = courseObject["presentationPoint"];
 
+    this.star = (courseObject["formalityPoint"] +
+            courseObject["contentPoint"] +
+            courseObject["presentationPoint"]) /
+        3;
     this.imageUrl = courseObject["imageUrl"] ??
         "https://static.scientificamerican.com/sciam/cache/file/92E141F8-36E4-4331-BB2EE42AC8674DD3_source.jpg";
 
@@ -89,6 +94,7 @@ class CourseContainer {
 
     this.instructorUserId = courseObject["instructor.user.id"] ?? "";
 
-    this.instructorUserName = courseObject["instructor.user.name"] ?? courseObject["name"] ?? "";
+    this.instructorUserName =
+        courseObject["instructor.user.name"] ?? courseObject["name"] ?? "";
   }
 }

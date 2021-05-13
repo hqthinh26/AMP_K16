@@ -12,7 +12,7 @@ class EntryItem extends StatelessWidget {
 
   Widget _buildTiles(Entry root) {
     return ListTile(
-      title: Text(root.title),
+      title: Text(root.title, style: TextStyle(color: Colors.white)),
       onTap: () => {},
     );
   }
@@ -36,7 +36,7 @@ class _CourseCategoryState extends State<CourseCategory> {
     Category category = Category();
     List<dynamic> data = await category.getAllCategories();
     setState(() {
-      listViews.add(DrawerHeader(child: Text("Danh sách khoá học")));
+      listViews.add(DrawerHeader(child: Text("Danh sách khoá học", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),)));
       data.forEach((item) => listViews.add(EntryItem(Entry(item["name"]))));
     });
   }
@@ -50,6 +50,7 @@ class _CourseCategoryState extends State<CourseCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.black,
         child: ListView.builder(
             itemCount: listViews.length,
             itemBuilder: (BuildContext context, int index) =>

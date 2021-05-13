@@ -48,7 +48,7 @@ class MinimizedSearchItem extends StatelessWidget {
                         RatingBar.builder(
                           ignoreGestures: true,
                           initialRating:
-                              this.courseContainer.ratedNumber.toDouble(),
+                              this.courseContainer.star.toDouble(),
                           itemSize: 17,
                           itemBuilder: (contexPt, _) =>
                               Icon(Icons.star, color: Colors.yellowAccent),

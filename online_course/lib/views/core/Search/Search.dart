@@ -18,7 +18,7 @@ class _SearchState extends State<Search> {
       {required BuildContext context, required String courseId}) async {
     Course course = Course();
     CourseContainer courseContainer = await course.getCourseInfo(courseId);
-    
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -88,24 +88,53 @@ class _SearchState extends State<Search> {
                   thickness: 2,
                   color: Colors.grey[800],
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: this.searchedCourses.length,
-                    itemBuilder: (BuildContext _, int index) {
-                      return InkWell(
-                        child: MinimizedSearchItem(
-                            courseContainer:
-                                this.searchedCourses.elementAt(index)),
-                        onTap: () => {
-                          this.getCourseInfo(
-                              context: context,
-                              courseId:
-                                  this.searchedCourses.elementAt(index).id)
-                        },
-                      );
-                    },
-                  ),
-                )
+                this.searchedCourses.length == 0
+                    ? Expanded(
+                        child: Container(
+                          color: Colors.black,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.youtube_searched_for, size: 100, color: Colors.white),
+                                Text("Không tìm thấy khoá học",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Fira",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23,
+                                      
+                                    )),
+                                    SizedBox(height: 10,),
+                                Text("Hãy thử từ khoá mới",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Fira"
+
+                                    )),
+                              ],
+                            )),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: this.searchedCourses.length,
+                          itemBuilder: (BuildContext _, int index) {
+                            return InkWell(
+                              child: MinimizedSearchItem(
+                                  courseContainer:
+                                      this.searchedCourses.elementAt(index)),
+                              onTap: () => {
+                                this.getCourseInfo(
+                                    context: context,
+                                    courseId: this
+                                        .searchedCourses
+                                        .elementAt(index)
+                                        .id)
+                              },
+                            );
+                          },
+                        ),
+                      )
 
                 // ElevatedButton(
                 //   child: Text("click me"),

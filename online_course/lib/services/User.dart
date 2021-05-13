@@ -98,7 +98,7 @@ class User extends DioCustomClass {
 
       response = await this
           .dioGetterSetter
-          .post('https://api.letstudy.org/user/login', data: body);
+          .post('/login', data: body);
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;

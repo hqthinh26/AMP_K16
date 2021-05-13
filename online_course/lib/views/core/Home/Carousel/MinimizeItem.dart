@@ -74,7 +74,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                           RatingBar.builder(
                             ignoreGestures: true,
                             initialRating:
-                                widget.courseContainer.ratedNumber.toDouble(),
+                                widget.courseContainer.star.toDouble(),
                             itemSize: 17,
                             itemBuilder: (contexPt, _) =>
                                 Icon(Icons.star, color: Colors.amber[200]),

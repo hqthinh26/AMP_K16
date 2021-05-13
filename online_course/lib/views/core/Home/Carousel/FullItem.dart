@@ -61,7 +61,7 @@ class _FullItemState extends State<FullItem> {
                 Container(
                   child: Row(
                     children: [
-                      Text("${widget.courseContainer.ratedNumber}",
+                      Text("${widget.courseContainer.star}",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class _FullItemState extends State<FullItem> {
                       RatingBar.builder(
                         ignoreGestures: true,
                         initialRating:
-                            widget.courseContainer.ratedNumber.toDouble(),
+                            widget.courseContainer.star.toDouble(),
                         itemSize: 17,
                         itemBuilder: (contexPt, _) =>
                             Icon(Icons.star, color: Colors.amber[200]),

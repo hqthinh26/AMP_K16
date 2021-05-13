@@ -1,7 +1,7 @@
 class UserContainer {
   late String id;
   late String email;
-  late String avatar;
+  String avatar = "https://storage.googleapis.com/letstudy/Avatar/28028b44-8f3b-4973-8b0d-b069f15f2b33.jpeg";
   late String name;
   late List<dynamic> favoriteCategories;
   late int point;
@@ -15,9 +15,9 @@ class UserContainer {
   UserContainer(Map<String, dynamic> user) {
     this.id = user["id"] ?? "";
     this.email = user["email"] ?? "";
-    this.avatar = user["avatar"] ?? "";
+    this.avatar = user["avatar"] ?? "https://storage.googleapis.com/letstudy/Avatar/28028b44-8f3b-4973-8b0d-b069f15f2b33.jpeg";
     this.name = user[""] ?? "huynh quoc thinh";
-    print('user: $user');
+    
     this.favoriteCategories = user["favoriteCategories"] == null
         ? <dynamic>[
             "JavaScript",
@@ -38,5 +38,6 @@ class UserContainer {
     this.facebookId = user["facebookId"] ?? "";
     this.isDeleted = user["isDeleted"] ?? false;
     this.isActivated = user["isActivated"] ?? true;
+    print('user: $user');
   }
 }
