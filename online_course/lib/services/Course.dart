@@ -79,12 +79,16 @@ class Course extends DioCustomClass {
     }
   }
 
-  Future<Iterable<CourseContainer>> searchedCourses({String keyword = "", int limit = 10, int offset = 0, String? category}) async {
+  Future<Iterable<CourseContainer>> searchedCourses(
+      {String keyword = "",
+      int limit = 10,
+      int offset = 0,
+      String? category}) async {
     try {
       this.keyword = keyword;
       this.limit = limit;
       this.offset = offset;
-      
+
       Map<String, dynamic> data = {
         "keyword": this.keyword,
         "opt": {
@@ -97,14 +101,32 @@ class Course extends DioCustomClass {
         "limit": this.limit,
         "offset": this.offset,
       };
-      Response response = await this.dioGetterSetter.post("/search", data: data);
+      Response response =
+          await this.dioGetterSetter.post("/search", data: data);
       Map<String, dynamic> result = response.data;
       List<dynamic> rows = result["payload"]["rows"];
       if (rows.length > 0) {
         return rows.map((item) => CourseContainer(item));
       } else {
-        return <CourseContainer> [];
+        return <CourseContainer>[];
       }
+    } on DioError catch (e) {
+      throw e;
+    }
+  }
+
+  Future<CourseContainer> getCourseInfo(String courseId) async {
+    try {
+      this.id = courseId;
+
+      // Map<String, dynamic> queryParameters = {"id": this.id};
+      Response response = await this
+          .dioGetterSetter
+          .get("/get-course-info", queryParameters: {"id": this.id});
+      Map<String, dynamic> result = response.data;
+      Map<String, dynamic> payload = result["payload"];
+      print("detail: $payload");
+      return CourseContainer(payload);
     } on DioError catch (e) {
       throw e;
     }

@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:online_course/services/Course.dart";
 import "package:online_course/containers/CourseContainer.dart";
 import "./MinimizedSearchItem.dart";
+import "package:online_course/views/core/Home/Carousel/FullItem.dart";
 
 class Search extends StatefulWidget {
   @override
@@ -11,12 +12,24 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   dynamic searchController = TextEditingController();
-  Iterable<CourseContainer> searchedCourses = <CourseContainer> [];
+  Iterable<CourseContainer> searchedCourses = <CourseContainer>[];
+
+  Future<void> getCourseInfo(
+      {required BuildContext context, required String courseId}) async {
+    Course course = Course();
+    CourseContainer courseContainer = await course.getCourseInfo(courseId);
+    
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FullItem(courseContainer: courseContainer)));
+  }
 
   Future<void> getCourses(String keyword) async {
     try {
       Course course = Course();
-      Iterable<CourseContainer> searchedCourses = await course.searchedCourses(keyword: keyword, limit: 10);
+      Iterable<CourseContainer> searchedCourses =
+          await course.searchedCourses(keyword: keyword, limit: 10);
 
       setState(() {
         this.searchedCourses = searchedCourses;
@@ -78,7 +91,20 @@ class _SearchState extends State<Search> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: this.searchedCourses.length,
-                    itemBuilder: (BuildContext _, int index) => MinimizedSearchItem(courseContainer: this.searchedCourses.elementAt(index))), 
+                    itemBuilder: (BuildContext _, int index) {
+                      return InkWell(
+                        child: MinimizedSearchItem(
+                            courseContainer:
+                                this.searchedCourses.elementAt(index)),
+                        onTap: () => {
+                          this.getCourseInfo(
+                              context: context,
+                              courseId:
+                                  this.searchedCourses.elementAt(index).id)
+                        },
+                      );
+                    },
+                  ),
                 )
 
                 // ElevatedButton(

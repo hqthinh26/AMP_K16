@@ -69,14 +69,16 @@ class _FullItemState extends State<FullItem> {
                           )),
                       SizedBox(width: 5),
                       RatingBar.builder(
-                          ignoreGestures: true,
-                          initialRating:
-                              widget.courseContainer.ratedNumber.toDouble(),
-                          itemSize: 17,
-                          itemBuilder: (contexPt, _) =>
-                              Icon(Icons.star, color: Colors.amber[200]),
-                          onRatingUpdate: (updatedStar) =>
-                              {print("updated start $updatedStar")}),
+                        ignoreGestures: true,
+                        initialRating:
+                            widget.courseContainer.ratedNumber.toDouble(),
+                        itemSize: 17,
+                        itemBuilder: (contexPt, _) =>
+                            Icon(Icons.star, color: Colors.amber[200]),
+                        onRatingUpdate: (updatedStar) =>
+                            {print("updated start $updatedStar")},
+                        unratedColor: Colors.grey[800],
+                      ),
                       SizedBox(width: 5),
                       Text(
                         "(Đã bán: ${widget.courseContainer.soldNumber})",

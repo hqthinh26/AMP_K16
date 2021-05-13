@@ -8,6 +8,9 @@ import 'package:online_course/views/user/Register.dart';
 
 import 'package:online_course/views/core/RootScreen.dart';
 import 'package:online_course/views/core/Home/Home.dart';
+
+import "package:online_course/views/core/Home/Carousel/FullItem.dart";
+
 import './PlayGround.dart';
 
 void main() {

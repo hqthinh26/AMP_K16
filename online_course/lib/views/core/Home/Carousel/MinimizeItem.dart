@@ -98,7 +98,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                 Expanded(
                     flex: 3,
                     child: Text(
-                      "${widget.courseContainer.price}đ",
+                      "đ${widget.courseContainer.price}",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,

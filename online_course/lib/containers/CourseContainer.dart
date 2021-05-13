@@ -89,6 +89,6 @@ class CourseContainer {
 
     this.instructorUserId = courseObject["instructor.user.id"] ?? "";
 
-    this.instructorUserName = courseObject["instructor.user.name"] ?? "";
+    this.instructorUserName = courseObject["instructor.user.name"] ?? courseObject["name"] ?? "";
   }
 }
