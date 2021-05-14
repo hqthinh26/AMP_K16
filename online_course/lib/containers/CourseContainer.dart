@@ -28,6 +28,7 @@ class CourseContainer {
   late List<dynamic> categoryIds;
   late String instructorUserId;
   late String instructorUserName;
+  bool isLoading = true;
 
   @override
   String toString() {
@@ -35,7 +36,9 @@ class CourseContainer {
   }
 
   CourseContainer(Map<String, dynamic> courseObject) {
-    this.id = courseObject["id"] ?? "testing";
+    this.id = courseObject["id"] ?? "Testing";
+
+    this.isLoading = courseObject["id"] is String  ? false : true;
 
     this.title = courseObject["title"] ?? "Testing title";
 
@@ -59,16 +62,15 @@ class CourseContainer {
 
     this.totalHours = courseObject["totalHours"] ?? -100;
 
-    this.formalityPoint = courseObject["formalityPoint"];
+    this.formalityPoint = courseObject["formalityPoint"] ?? 0;
 
-    this.contentPoint = courseObject["contentPoint"];
+    this.contentPoint = courseObject["contentPoint"] ?? 0;
 
-    this.presentationPoint = courseObject["presentationPoint"];
+    this.presentationPoint = courseObject["presentationPoint"] ?? 0;
 
-    this.star = (courseObject["formalityPoint"] +
-            courseObject["contentPoint"] +
-            courseObject["presentationPoint"]) /
-        3;
+    this.star =
+        (this.formalityPoint + this.contentPoint + this.presentationPoint) /
+            3.toDouble();
     this.imageUrl = courseObject["imageUrl"] ??
         "https://static.scientificamerican.com/sciam/cache/file/92E141F8-36E4-4331-BB2EE42AC8674DD3_source.jpg";
 

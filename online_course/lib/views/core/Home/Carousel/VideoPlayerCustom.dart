@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:video_player/video_player.dart';
 import "package:chewie/chewie.dart";
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerCustom extends StatefulWidget {
   late final String promoVidUrl;
@@ -15,13 +15,13 @@ class _VideoPlayerState extends State<VideoPlayerCustom> {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
 
-  YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'iLnmTe5Q2Qw',
-    flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: true,
-    ),
-);
+//   YoutubePlayerController _controller = YoutubePlayerController(
+//     initialVideoId: 'iLnmTe5Q2Qw',
+//     flags: YoutubePlayerFlags(
+//         autoPlay: true,
+//         mute: true,
+//     ),
+// );
 
 
   @override
