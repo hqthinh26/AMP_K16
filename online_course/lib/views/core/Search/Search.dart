@@ -57,6 +57,8 @@ class _SearchState extends State<Search> {
                             height: 40,
                             child: TextField(
                                 controller: searchController,
+                                //autofocus: true,
+                                
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   color: Colors.white,
@@ -64,6 +66,8 @@ class _SearchState extends State<Search> {
                                 onSubmitted: getCourses,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 0),
+                                  hintText: "Từ khoá nổi bật: C++, Java",
+                                  hintStyle: TextStyle(color: Colors.grey[500], fontSize: 14, ),
                                   prefixIcon:
                                       Icon(Icons.search, color: Colors.white),
                                   fillColor: Colors.grey[800],

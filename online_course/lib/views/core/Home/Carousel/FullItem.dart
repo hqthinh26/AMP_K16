@@ -61,7 +61,7 @@ class _FullItemState extends State<FullItem> {
                 Container(
                   child: Row(
                     children: [
-                      Text("${widget.courseContainer.star}",
+                      Text("${(widget.courseContainer.star).ceil()}",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

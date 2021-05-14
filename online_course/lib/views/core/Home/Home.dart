@@ -13,13 +13,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Iterable<CourseContainer> topNew = <CourseContainer>[];
-  Iterable<CourseContainer> topSell = <CourseContainer>[];
-  Iterable<CourseContainer> topRate = <CourseContainer>[];
+  // Iterable<CourseContainer> topNew =
+  //     List<CourseContainer>.filled(10, CourseContainer({}));
+  //  Iterable<CourseContainer> topRate =
+  //   List<CourseContainer>.filled(10, CourseContainer({}));
+  // Iterable<CourseContainer> topSell =
+  //   List<CourseContainer>.filled(10, CourseContainer({}));
 
-  void onTapInkWell() {
-    print("I am doing something");
-  }
+
+  // Iterable<CourseContainer> topNew = <CourseContainer>[];
+  // Iterable<CourseContainer> topSell = <CourseContainer>[];
+  // Iterable<CourseContainer> topRate = <CourseContainer>[];
+
+
+  Iterable<CourseContainer> topNew =
+      Iterable<CourseContainer>.generate(10, (int) => CourseContainer({}));
+
+  Iterable<CourseContainer> topRate =
+      Iterable<CourseContainer>.generate(10, (int) => CourseContainer({}));
+
+  Iterable<CourseContainer> topSell =
+      Iterable<CourseContainer>.generate(10, (int) => CourseContainer({}));
+
 
   @override
   void initState() {
@@ -94,7 +109,7 @@ class _HomeState extends State<Home> {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
-                              decoration: BoxDecoration(color: Colors.blue),
+                              decoration: BoxDecoration(color: Colors.black),
                               child: InkWell(
                                 child: MinimizeItem(
                                   courseContainer: course,
@@ -149,12 +164,18 @@ class _HomeState extends State<Home> {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
-                              decoration: BoxDecoration(color: Colors.blue),
+                              decoration: BoxDecoration(color: Colors.black),
                               child: InkWell(
-                                  onTap: onTapInkWell,
                                   child: MinimizeItem(
                                     courseContainer: course,
-                                  )),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => FullItem(
+                                                courseContainer: course)));
+                                  }),
                             );
                           },
                         );
@@ -197,12 +218,18 @@ class _HomeState extends State<Home> {
                             return Container(
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
-                              decoration: BoxDecoration(color: Colors.blue),
+                              decoration: BoxDecoration(color: Colors.black),
                               child: InkWell(
-                                  onTap: onTapInkWell,
                                   child: MinimizeItem(
                                     courseContainer: course,
-                                  )),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => FullItem(
+                                                courseContainer: course)));
+                                  }),
                             );
                           },
                         );
