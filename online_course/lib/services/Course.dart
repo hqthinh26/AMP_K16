@@ -132,5 +132,17 @@ class Course extends DioCustomClass {
     }
   }
 
-  //Danh sách khoá học the keyword
+  //Lấy danh sách đánh giá của khoá học
+  Future<Map<String, dynamic>> getCourseRatings({required String courseId, String userId = "default"}) async {
+    try {
+       String apiEndpoint = "/get-course-detail/$courseId/$userId";
+       print("endpoint text $apiEndpoint");
+       Response response = await this.dioGetterSetter.get(apiEndpoint);
+       Map<String, dynamic> result = response.data;
+       Map<String, dynamic> ratings = result["payload"]["ratings"];
+       return ratings;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
