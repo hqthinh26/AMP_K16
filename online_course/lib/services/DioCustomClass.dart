@@ -33,10 +33,10 @@ class DioCustomClass {
   Future<dynamic> requestInterceptor(
       RequestOptions options, RequestInterceptorHandler handler) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     if (options.headers.containsKey("requiresToken")) {
       options.headers.remove("requiresToken");
 
+      print("API này cần token: ${prefs.getString("token")}");
       if (prefs.containsKey("token")) {
         String? token = prefs.getString("token");
         options.headers['Authorization'] = "Bearer $token";
@@ -47,12 +47,12 @@ class DioCustomClass {
             error: "Yêu cầu người dùng đăng nhập");
       }
     }
-    print("API này không cần token: ${prefs.getString("token")}");
     return handler.next(options);
   }
 
   Future<dynamic> responseInterceptor(
       Response response, ResponseInterceptorHandler handler) async {
+    print("status code: ${response.statusCode}");
     handler.next(response);
   }
 

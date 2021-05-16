@@ -29,7 +29,6 @@ class UserContainer {
                 "JavaScript",
                 "Python",
                 "React",
-                "ALoo",
               ]
             : user["favoriteCategories"];
     this.point = user["point"] ?? 0;

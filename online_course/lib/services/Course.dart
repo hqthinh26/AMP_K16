@@ -125,7 +125,6 @@ class Course extends DioCustomClass {
           .get("/get-course-info", queryParameters: {"id": this.id});
       Map<String, dynamic> result = response.data;
       Map<String, dynamic> payload = result["payload"];
-      print("detail: $payload");
       return CourseContainer(payload);
     } on DioError catch (e) {
       throw e;

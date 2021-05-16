@@ -46,7 +46,9 @@ class User extends DioCustomClass {
 
   Future<Map<String, dynamic>> getUserInfo() async {
     try {
-      Response user = await this.dioGetterSetter.get("/me", options: Options(headers: {"requiresToken": true}));
+      Response user = await this
+          .dioGetterSetter
+          .get("/me", options: Options(headers: {"requiresToken": true}));
       Map<String, dynamic> data = user.data;
       Map<String, dynamic> payload = data["payload"];
       return payload;
@@ -96,9 +98,7 @@ class User extends DioCustomClass {
         'password': this.password,
       };
 
-      response = await this
-          .dioGetterSetter
-          .post('/login', data: body);
+      response = await this.dioGetterSetter.post('/login', data: body);
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = response.data;
