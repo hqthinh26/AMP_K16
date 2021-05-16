@@ -107,9 +107,10 @@ class _HomeState extends State<Home> {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
+                              
                               width: MediaQuery.of(context).size.width / (1.3),
                               margin: EdgeInsets.symmetric(horizontal: 1.0),
-                              decoration: BoxDecoration(color: Colors.black),
+                              decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(5)),
                               child: InkWell(
                                 child: MinimizeItem(
                                   courseContainer: course,

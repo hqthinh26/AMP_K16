@@ -38,6 +38,5 @@ class UserContainer {
     this.facebookId = user["facebookId"] ?? "";
     this.isDeleted = user["isDeleted"] ?? false;
     this.isActivated = user["isActivated"] ?? true;
-    print('user: $user');
   }
 }
