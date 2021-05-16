@@ -46,7 +46,7 @@ class User extends DioCustomClass {
 
   Future<Map<String, dynamic>> getUserInfo() async {
     try {
-      Response user = await this.dioGetterSetter.get("/me");
+      Response user = await this.dioGetterSetter.get("/me", options: Options(headers: {"requiresToken": true}));
       Map<String, dynamic> data = user.data;
       Map<String, dynamic> payload = data["payload"];
       return payload;
