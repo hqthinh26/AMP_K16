@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/services/User.dart';
+import "package:online_course/views/core/RootScreen.dart";
 
 class SignIn extends StatefulWidget {
   @override
@@ -15,14 +16,10 @@ class _SignInState extends State<SignIn> {
     Future<void> onLogin() async {
       User loginUser = User.login(
           email: emailController.text, password: passwordController.text);
-
       bool status = await loginUser.login(context);
       if (status) {
-        //Navigator.pushNamed(context, '/root_screen');
-        Navigator.pushNamed(
-          context,
-          '/root_screen',
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RootScreen(initIndex: 4)));
       }
     }
 
@@ -30,6 +27,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         title: Text("Sign In"),
         backgroundColor: Colors.grey[800],
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         color: Colors.black,
@@ -109,8 +107,7 @@ class _SignInState extends State<SignIn> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                   child: ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/register'),
+                    onPressed: () => Navigator.pushNamed(context, '/register'),
                     style: ElevatedButton.styleFrom(
                         side: BorderSide(width: 1, color: Colors.green),
                         primary: Colors.green),
@@ -125,8 +122,10 @@ class _SignInState extends State<SignIn> {
                     margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                     child: TextButton(
                       onPressed: () =>
-                          {Navigator.pushNamed(context, "/helper")},
-                      child: Text("Need help?"),
+                          {Navigator.pushNamed(context, "/root_screen")},
+                      child: Text("Trở về trang chủ",
+                          style:
+                              TextStyle(decoration: TextDecoration.underline)),
                     )),
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
