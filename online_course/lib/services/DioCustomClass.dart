@@ -20,21 +20,45 @@ class DioCustomClass {
 
   void addInterceptors() {
     this._dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        return await this.requestInterceptor(options, handler);
-      },
-    ));
+          onRequest: (options, handler) async {
+            return await this.requestInterceptor(options, handler);
+          },
+          onResponse: (response, handler) async {
+            return await this.responseInterceptor(response, handler);
+          },
+          onError: (error, handler) => this.errorInterceptor(error, handler),
+        ));
   }
 
   Future<dynamic> requestInterceptor(
       RequestOptions options, RequestInterceptorHandler handler) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token") ?? "";
 
-    options.headers['Authorization'] = "Bearer $token";
-    print('token $token');
+    if (options.headers.containsKey("requiresToken")) {
+      options.headers.remove("requiresToken");
 
+      if (prefs.containsKey("token")) {
+        String? token = prefs.getString("token");
+        options.headers['Authorization'] = "Bearer $token";
+      } else {
+        return DioError(
+            requestOptions: options,
+            type: DioErrorType.other,
+            error: "Yêu cầu người dùng đăng nhập");
+      }
+    }
+    print("API này không cần token: ${prefs.getString("token")}");
     return handler.next(options);
+  }
+
+  Future<dynamic> responseInterceptor(
+      Response response, ResponseInterceptorHandler handler) async {
+    handler.next(response);
+  }
+
+  dynamic errorInterceptor(DioError error, ErrorInterceptorHandler handler) {
+    print("error Interceptor: ${error.error}");
+    handler.next(error);
   }
 
   //Creating this._dio getter
