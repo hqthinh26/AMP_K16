@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:online_course/services/User.dart";
 import "package:online_course/containers/UserContainer.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
 class Account extends StatefulWidget {
   @override
@@ -11,17 +12,26 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   UserContainer userContainer = UserContainer({"favoriteCategories": []});
 
-  Future<void> getUserInfo() async {
+  Future<void> initAccountSreen() async {
     User user = User();
+
     Map<String, dynamic> result = await user.getUserInfo();
     UserContainer data = UserContainer(result);
     setState(() => userContainer = data);
   }
 
+  Future<void> logOutAction() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey("token")) {
+      prefs.remove("token");
+    }
+    Navigator.pushNamed(context, '/root_screen');
+  }
+
   @override
   void initState() {
     super.initState();
-    this.getUserInfo();
+    this.initAccountSreen();
   }
 
   @override
@@ -67,8 +77,7 @@ class _AccountState extends State<Account> {
                             )),
                         ElevatedButton(
                           child: Text("Đăng xuất"),
-                          onPressed: () =>
-                              Navigator.pushNamed(context, '/sign_in'),
+                          onPressed: logOutAction,
                         )
                       ],
                     ),
