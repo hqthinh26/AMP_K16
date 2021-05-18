@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import "package:shared_preferences/shared_preferences.dart";
+
 import './Account.dart';
 import './Home/Home.dart';
 import "./Search/Search.dart";
-import "package:shared_preferences/shared_preferences.dart";
+import "./MyCourse/MyCourse.dart";
 
 class RootScreen extends StatefulWidget {
-
   final int initIndex;
 
   RootScreen({this.initIndex = 0});
@@ -15,7 +16,6 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-
   int _currentIndex;
 
   _RootScreenState(this._currentIndex);
@@ -37,7 +37,7 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> mainScreens = <Widget>[
     Home(),
     Search(),
-    Center(child: Text("My Courses")),
+    MyCourse(),
     Center(child: Text("Wishlist")),
     Account(),
   ];

@@ -53,11 +53,12 @@ class DioCustomClass {
   Future<dynamic> responseInterceptor(
       Response response, ResponseInterceptorHandler handler) async {
     print("status code: ${response.statusCode}");
+    print(response.requestOptions.path);
     handler.next(response);
   }
 
   dynamic errorInterceptor(DioError error, ErrorInterceptorHandler handler) {
-    print("error Interceptor: ${error.error}");
+    print("error Interceptor: $error");
     handler.next(error);
   }
 

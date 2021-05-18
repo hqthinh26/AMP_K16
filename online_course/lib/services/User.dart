@@ -1,6 +1,5 @@
-// import 'dart:convert' as convert;
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:http/http.dart' as http;
+
 import 'package:dio/dio.dart';
 import 'package:online_course/services/DioCustomClass.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +43,31 @@ class User extends DioCustomClass {
             ));
   }
 
+  Future<Iterable<dynamic>> getProcessCourses() async {
+    try {
+      Response response = await this.dioGetterSetter.get("/get-process-courses",
+          options: Options(headers: <String, dynamic>{"requiresToken": true}));
+      Map<String, dynamic> result = response.data;
+      Iterable<dynamic> payload = result["payload"];
+      return payload.length != 0 ? payload : <dynamic>[];
+    } on DioError catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<Iterable<dynamic>> getFavoriteCourses() async {
+    try {
+      Response response = await this.dioGetterSetter.get(
+          "/get-favorite-courses",
+          options: Options(headers: <String, dynamic>{"requiresToken": true}));
+      Map<String, dynamic> result = response.data;
+      Iterable<dynamic> payload = result["payload"];
+      return payload.length != 0 ? payload : <dynamic>[];
+    } on DioError catch (e) {
+      throw (e);
+    }
+  }
+
   Future<Map<String, dynamic>> getUserInfo() async {
     try {
       Response user = await this
@@ -51,6 +75,7 @@ class User extends DioCustomClass {
           .get("/me", options: Options(headers: {"requiresToken": true}));
       Map<String, dynamic> data = user.data;
       Map<String, dynamic> payload = data["payload"];
+      print(payload);
       return payload;
     } on DioError catch (e) {
       if (e.response != null) {

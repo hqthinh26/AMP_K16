@@ -4,8 +4,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MinimizedSearchItem extends StatelessWidget {
   final CourseContainer courseContainer;
+  final bool courseOwned;
 
-  MinimizedSearchItem({Key? key, required this.courseContainer})
+  MinimizedSearchItem(
+      {Key? key, required this.courseContainer, this.courseOwned = false})
       : super(key: key) {
     print(this.courseContainer);
   }
@@ -43,40 +45,41 @@ class MinimizedSearchItem extends StatelessWidget {
                     SizedBox(height: 2),
                     Text(this.courseContainer.instructorUserName,
                         style: TextStyle(color: Colors.grey[500])),
-                    Row(
-                      children: [
-                        RatingBar.builder(
-                          ignoreGestures: true,
-                          initialRating:
-                              this.courseContainer.star.toDouble(),
-                          itemSize: 17,
-                          itemBuilder: (contexPt, _) =>
-                              Icon(Icons.star, color: Colors.yellowAccent),
-                          onRatingUpdate: (updatedStar) =>
-                              {print("updated start $updatedStar")},
-                          unratedColor: Colors.grey[800],
-                        ),
-                        Text(
-                          "(Đã bán: ${this.courseContainer.soldNumber})",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.yellow,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              //fontFamily: "Fira",
-                              fontStyle: FontStyle.italic),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "đ${this.courseContainer.price}",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Fira",
-                          fontSize: 16),
-                    ),
+                    if (!courseOwned)
+                      Row(
+                        children: [
+                          RatingBar.builder(
+                            ignoreGestures: true,
+                            initialRating: this.courseContainer.star.toDouble(),
+                            itemSize: 17,
+                            itemBuilder: (contexPt, _) =>
+                                Icon(Icons.star, color: Colors.yellowAccent),
+                            onRatingUpdate: (updatedStar) =>
+                                {print("updated start $updatedStar")},
+                            unratedColor: Colors.grey[800],
+                          ),
+                          Text(
+                            "(Đã bán: ${this.courseContainer.soldNumber})",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.yellow,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                //fontFamily: "Fira",
+                                fontStyle: FontStyle.italic),
+                          )
+                        ],
+                      ),
+                    if (!courseOwned)
+                      Text(
+                        "đ${this.courseContainer.price}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Fira",
+                            fontSize: 16),
+                      ),
                   ],
                 ),
               ),
