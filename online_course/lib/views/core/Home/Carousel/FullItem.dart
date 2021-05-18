@@ -4,19 +4,20 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import "package:date_format/date_format.dart";
 import './VideoPlayerCustom.dart';
 import "package:online_course/services/Course.dart";
+import "package:online_course/containers/Ratings.dart";
 
-class Ratings {
-  List<dynamic> ratingList = <dynamic>[];
-  List<dynamic> stars = <dynamic>[];
+// class Ratings {
+//   List<dynamic> ratingList = <dynamic>[];
+//   List<dynamic> stars = <dynamic>[];
 
-  Ratings(
-      {this.ratingList = const <dynamic>[], this.stars = const <dynamic>[]});
+//   Ratings(
+//       {this.ratingList = const <dynamic>[], this.stars = const <dynamic>[]});
 
-  @override
-  String toString() {
-    return "${this.ratingList} - ${this.stars}";
-  }
-}
+//   @override
+//   String toString() {
+//     return "${this.ratingList} - ${this.stars}";
+//   }
+// }
 
 class FullItem extends StatefulWidget {
   final CourseContainer courseContainer;
@@ -47,9 +48,10 @@ class _FullItemState extends State<FullItem> {
           await course.getCourseRatings(courseId: widget.courseContainer.id);
 
       setState(() {
-        ratings = Ratings(
-            ratingList: ratingApi["ratingList"], stars: ratingApi["stars"]);
-        print("ratings $ratings");
+        ratings = Ratings(ratings: ratingApi);
+        // ratings = Ratings(
+        //     ratingList: ratingApi["ratingList"], stars: ratingApi["stars"]);
+        //print("ratings $ratings");
       });
     } catch (e) {
       print(e);
@@ -416,7 +418,7 @@ class _FullItemState extends State<FullItem> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item["user"]["name"],
+                                  item.user.name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -426,7 +428,7 @@ class _FullItemState extends State<FullItem> {
                                 RatingBar.builder(
                                   ignoreGestures: true,
                                   initialRating:
-                                      item["averagePoint"].toDouble(),
+                                      item.averagePoint.toDouble(),
                                   itemSize: 17,
                                   itemBuilder: (contexPt, _) => Icon(Icons.star,
                                       color: Colors.amber[200]),
@@ -435,7 +437,7 @@ class _FullItemState extends State<FullItem> {
                                   unratedColor: Colors.grey[800],
                                 ),
                                 SizedBox(height: 5),
-                                Text(item["content"], style: TextStyle(color: Colors.white),),
+                                Text(item.content, style: TextStyle(color: Colors.white),),
                                 SizedBox(height: 20),
                               ],
                             ));
