@@ -27,7 +27,7 @@ class CourseContainer {
   late int typeUploadVideoLesson; //1: "Upload File", 2: "Link Youtube"
   late List<dynamic> categoryIds;
   late String instructorUserId;
-  late String instructorUserName;
+  String instructorUserName = "Không có";
   bool isLoading = true;
 
   @override
@@ -38,7 +38,7 @@ class CourseContainer {
   CourseContainer(Map<String, dynamic> courseObject) {
     this.id = courseObject["id"] ?? "Testing";
 
-    this.isLoading = courseObject["id"] is String  ? false : true;
+    this.isLoading = courseObject["id"] is String ? false : true;
 
     this.title = courseObject["title"] ?? "Testing title";
 
@@ -96,7 +96,6 @@ class CourseContainer {
 
     this.instructorUserId = courseObject["instructor.user.id"] ?? "";
 
-    this.instructorUserName =
-        courseObject["instructor.user.name"] ?? courseObject["name"] ?? "";
+    this.instructorUserName = "Không có";
   }
 }

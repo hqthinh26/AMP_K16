@@ -5,6 +5,7 @@ import './Account.dart';
 import './Home/Home.dart';
 import "./Search/Search.dart";
 import "./MyCourse/MyCourse.dart";
+import './Wishlist/Wishlist.dart';
 
 class RootScreen extends StatefulWidget {
   final int initIndex;
@@ -38,7 +39,7 @@ class _RootScreenState extends State<RootScreen> {
     Home(),
     Search(),
     MyCourse(),
-    Center(child: Text("Wishlist")),
+    Wishlist(),
     Account(),
   ];
 

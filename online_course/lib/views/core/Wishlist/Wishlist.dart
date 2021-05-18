@@ -11,14 +11,14 @@ import "package:online_course/views/core/Search/MinimizedSearchItem.dart";
 import "package:online_course/views/core/Home/Carousel/FullItem.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class MyCourse extends StatefulWidget {
+class Wishlist extends StatefulWidget {
   @override
-  _MyCourseState createState() => _MyCourseState();
+  _WishlistState createState() => _WishlistState();
 }
 
-class _MyCourseState extends State<MyCourse> {
+class _WishlistState extends State<Wishlist> {
   dynamic searchController = TextEditingController();
-  Iterable<UserCourseContainer> userProcessCourses = <UserCourseContainer>[];
+  Iterable<UserCourseContainer> userFavoritesCourses = <UserCourseContainer>[];
   bool loading = true;
 
   final spinkit = Container(
@@ -39,26 +39,28 @@ class _MyCourseState extends State<MyCourse> {
     Course course = Course();
     CourseContainer courseContainer = await course.getCourseInfo(courseId);
 
+    print("&&&&&&&&&&&");
+    print(courseContainer);
+
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => FullItem(courseContainer: courseContainer)));
   }
 
-  Future<void> getUserProcessCoures() async {
+  Future<void> getUserFavoriteCoures() async {
     try {
       User user = User();
-      Iterable<dynamic> payload = await user.getProcessCourses(); 
-      loading = false;
+      Iterable<dynamic> payload = await user.getFavoriteCourses();
 
       if (payload.length == 0) return;
 
       setState(() {
-        userProcessCourses =
+        loading = false;
+        userFavoritesCourses =
             payload.map((item) => UserCourseContainer(courseInfo: item));
       });
     } on DioError catch (e) {
-      loading = false;
       print(e);
     }
   }
@@ -66,7 +68,7 @@ class _MyCourseState extends State<MyCourse> {
   @override
   void initState() {
     super.initState();
-    getUserProcessCoures();
+    getUserFavoriteCoures();
   }
 
   @override
@@ -87,7 +89,7 @@ class _MyCourseState extends State<MyCourse> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("My courses",
+                          Text("Wishlist",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -106,7 +108,7 @@ class _MyCourseState extends State<MyCourse> {
               thickness: 1,
               color: Colors.grey[850],
             ),
-            this.userProcessCourses.length == 0
+            this.userFavoritesCourses.length == 0
                 ? Expanded(
                     child: Container(
                         color: Colors.black,
@@ -128,21 +130,22 @@ class _MyCourseState extends State<MyCourse> {
                   )
                 : Expanded(
                     child: ListView.builder(
-                      itemCount: this.userProcessCourses.length,
+                      itemCount: this.userFavoritesCourses.length,
                       itemBuilder: (BuildContext _, int index) {
                         return InkWell(
                           child: MinimizedSearchItem(
                             courseContainer: this
-                                .userProcessCourses
+                                .userFavoritesCourses
                                 .elementAt(index)
                                 .toCourseContainerObject(),
-                            courseOwned: true,
                           ),
                           onTap: () => {
                             this.getCourseInfo(
                                 context: context,
-                                courseId:
-                                    this.userProcessCourses.elementAt(index).id)
+                                courseId: this
+                                    .userFavoritesCourses
+                                    .elementAt(index)
+                                    .id)
                           },
                         );
                       },

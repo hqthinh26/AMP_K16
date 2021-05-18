@@ -16,13 +16,11 @@ class UserCourseContainer {
 
   UserCourseContainer(
       {Map<String, dynamic> courseInfo = const <String, dynamic>{}}) {
-        print("&&&&&*******&&&&&&&&");
-        print(courseInfo);
     this.id = courseInfo["id"] ?? this.id;
     this.courseTitle = courseInfo["courseTitle"] ?? this.courseTitle;
-   
+
     this.coursePrice = courseInfo["coursePrice"] ?? this.coursePrice;
-   
+
     this.courseImage = courseInfo["courseImage"] ?? this.courseImage;
     this.instructorId = courseInfo["instructorId"] ?? this.instructorId;
     this.instructorName = courseInfo["instructorName"] ?? this.instructorName;
