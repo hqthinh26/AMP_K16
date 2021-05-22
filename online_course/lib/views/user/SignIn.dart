@@ -71,20 +71,20 @@ class _SignInState extends State<SignIn> {
             ),
             //Nhập mật khẩu
             TextField(
-                controller: passwordController,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  fillColor: Colors.grey[800],
-                  filled: true,
-                  prefixIcon:
-                      Icon(Icons.remove_red_eye_sharp, color: Colors.white),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-
-                  // hintText: "Tên tài khoản",
-                )),
+              controller: passwordController,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                fillColor: Colors.grey[800],
+                filled: true,
+                prefixIcon:
+                    Icon(Icons.remove_red_eye_sharp, color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              onSubmitted: (value) => onLogin(),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:online_course/services/User.dart";
 import "package:online_course/containers/UserContainer.dart";
+import "./UpdateAccount.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 class Account extends StatefulWidget {
@@ -17,6 +18,7 @@ class _AccountState extends State<Account> {
 
     Map<String, dynamic> result = await user.getUserInfo();
     UserContainer data = UserContainer(result);
+
     setState(() => userContainer = data);
   }
 
@@ -26,6 +28,13 @@ class _AccountState extends State<Account> {
       prefs.remove("token");
     }
     Navigator.pushNamed(context, '/root_screen');
+  }
+
+  Future<void> refreshOnBack() async {
+    bool shouldReload = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => UpdateAccount(userContainer)));
+
+    shouldReload ? await initAccountSreen() : print("no need to reload");
   }
 
   @override
@@ -44,6 +53,7 @@ class _AccountState extends State<Account> {
       ),
       body: SingleChildScrollView(
         child: Container(
+            padding: EdgeInsets.only(left: 15, right: 15),
             color: Colors.black,
             child: SafeArea(
               child: Column(
@@ -51,10 +61,12 @@ class _AccountState extends State<Account> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                      child: Center(
-                    child: Column(
-                      children: [
-                        ClipRRect(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
                             '${this.userContainer.avatar}',
@@ -63,27 +75,135 @@ class _AccountState extends State<Account> {
                             width: 160.0,
                           ),
                         ),
-                        Text(this.userContainer.id,
-                            style: TextStyle(
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Giới thiệu",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold)),
+                            TextButton(
+                              onPressed: () => refreshOnBack(),
+                              child: Text(
+                                "Chỉnh sửa",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 5,
+                          children: [
+                            Icon(
+                              Icons.person_outline,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            )),
-                        Text(this.userContainer.email,
-                            style: TextStyle(
+                              size: 20,
+                            ),
+                            Text(
+                              "Thành viên ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            Text(this.userContainer.name,
+                                style: TextStyle(
+                                  color: Colors.lightBlueAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )),
+                          ]),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 5,
+                          children: [
+                            Icon(
+                              Icons.mail_outline,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            )),
-                        ElevatedButton(
-                          child: Text("Đăng xuất"),
-                          onPressed: logOutAction,
-                        )
-                      ],
-                    ),
+                              size: 20,
+                            ),
+                            Text(
+                              "Email ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            Text(this.userContainer.email,
+                                style: TextStyle(
+                                  color: Colors.lightBlueAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )),
+                          ]),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 5,
+                          children: [
+                            Icon(
+                              Icons.phone_outlined,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                            Text(
+                              "Điện thoại ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            Text(this.userContainer.phone,
+                                style: TextStyle(
+                                  color: Colors.lightBlueAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )),
+                          ]),
+
+                      // Text(this.userContainer.phone,
+                      //     style: TextStyle(
+                      //       color: Colors.white,
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 16,
+                      //     )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.logout,
+                            color: Colors.red,
+                          ),
+                          TextButton(
+                            onPressed: logOutAction,
+                            child: Text(
+                              "Đăng xuất",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                              //onPressed: logOutAction,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   )),
                   Container(
-                      padding: EdgeInsets.only(top: 40, left: 15),
+                      padding: EdgeInsets.only(top: 40),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

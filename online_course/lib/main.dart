@@ -7,7 +7,7 @@ import 'package:online_course/views/user/Register.dart';
 
 import 'package:online_course/views/core/RootScreen.dart';
 import 'package:online_course/views/core/Home/Home.dart';
-import 'package:online_course/views/core/Account.dart';
+import 'package:online_course/views/core/Account/Account.dart';
 
 //import "package:online_course/views/core/Home/Carousel/FullItem.dart";
 void main() {

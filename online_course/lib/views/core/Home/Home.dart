@@ -90,9 +90,10 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 22,
                         //fontStyle: FontStyle.italic,
-                        fontFamily: "Fira"),
+                        //fontFamily: "Fira"
+                        ),
                   ),
                   SizedBox(height: 20),
                   Container(
@@ -146,9 +147,10 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 22,
                         //fontStyle: FontStyle.italic,
-                        fontFamily: "Fira"),
+                        //fontFamily: "Fira"
+                        ),
                   ),
                   SizedBox(height: 20),
                   Container(
@@ -200,9 +202,10 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 22,
                         //fontStyle: FontStyle.italic,
-                        fontFamily: "Fira"),
+                        //fontFamily: "Fira"
+                        ),
                   ),
                   SizedBox(height: 20),
                   Container(

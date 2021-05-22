@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:shared_preferences/shared_preferences.dart";
 
-import './Account.dart';
+import './Account/Account.dart';
 import './Home/Home.dart';
 import "./Search/Search.dart";
 import "./MyCourse/MyCourse.dart";

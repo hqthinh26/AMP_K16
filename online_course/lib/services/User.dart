@@ -147,4 +147,24 @@ class User extends DioCustomClass {
       return false;
     }
   }
+
+  Future<bool> updateUserProfile(
+      {required String name,
+      required String avatar,
+      required String phone}) async {
+    try {
+      Map<String, dynamic> data = {
+        "name": name,
+        "avatar": avatar,
+        "phone": phone
+      };
+      Response response = await this.dioGetterSetter.put("/update-profile",
+          data: data, options: Options(headers: {"requiresToken": true}));
+
+      print(response.data);
+      return response.statusCode == 200 ? true : false;
+    } on DioError catch (e) {
+      throw (e);
+    }
+  }
 }

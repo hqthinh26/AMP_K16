@@ -75,7 +75,8 @@ class _MinimizeItemState extends State<MinimizeItem> {
                             color: Colors.white,
                             //fontWeight: FontWeight.bold,
                             fontSize: 13,
-                            fontFamily: "Fira"),
+                            //fontFamily: "Fira"
+                            ),
                       ),
                     ),
                   ),
@@ -101,7 +102,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                               style: TextStyle(
                                   color: Colors.yellow,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: "Fira",
+                                  //fontFamily: "Fira",
                                   fontStyle: FontStyle.italic),
                             )
                           ],
@@ -116,7 +117,7 @@ class _MinimizeItemState extends State<MinimizeItem> {
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontFamily: "Fira",
+                            //fontFamily: "Fira",
                             fontSize: 18),
                       ))
                 ],

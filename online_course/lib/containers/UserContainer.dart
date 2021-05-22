@@ -16,7 +16,7 @@ class UserContainer {
     this.id = user["id"] ?? "";
     this.email = user["email"] ?? "";
     this.avatar = user["avatar"] ?? "https://storage.googleapis.com/letstudy/Avatar/28028b44-8f3b-4973-8b0d-b069f15f2b33.jpeg";
-    this.name = user[""] ?? "huynh quoc thinh";
+    this.name = user["name"] ?? "Empty";
     
     this.favoriteCategories = user["favoriteCategories"] == null
         ? <dynamic>[
