@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/services/User.dart';
+import "package:flutter/services.dart";
 
 class Register extends StatefulWidget {
   @override
@@ -196,6 +197,10 @@ class _RegisterState extends State<Register> {
                             margin: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 10.0),
                             child: TextFormField(
                               controller: phoneNumberController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]'))
+                              ],
                               keyboardType: TextInputType.number,
                               style: TextStyle(color: Colors.black),
                               autofocus: true,

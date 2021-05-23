@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import "package:flutter/material.dart";
 import 'package:online_course/containers/UserContainer.dart';
 import "package:online_course/services/User.dart";
+import "package:flutter/services.dart";
 
 class UpdateAccount extends StatefulWidget {
   late final UserContainer userContainer;
@@ -136,6 +137,9 @@ class _UpdateAccountState extends State<UpdateAccount> {
                         controller: phoneController,
                         style: TextStyle(color: Colors.white),
                         autofocus: true,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                        ],
                         decoration: InputDecoration(
                             //fillColor: Colors.grey,
                             //filled: true,

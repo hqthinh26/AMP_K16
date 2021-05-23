@@ -10,6 +10,9 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   dynamic emailController = TextEditingController();
   dynamic passwordController = TextEditingController();
+  bool emailFocus = true;
+  bool passwordFocus = false;
+  FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class _SignInState extends State<SignIn> {
             TextField(
                 controller: emailController,
                 style: TextStyle(color: Colors.white),
-                autofocus: true,
+                autofocus: emailFocus,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.account_circle, color: Colors.white),
                   fillColor: Colors.grey[800],
@@ -72,7 +75,9 @@ class _SignInState extends State<SignIn> {
             //Nhập mật khẩu
             TextField(
               controller: passwordController,
+              obscureText: true,
               style: TextStyle(color: Colors.white),
+              autocorrect: passwordFocus,
               decoration: InputDecoration(
                 fillColor: Colors.grey[800],
                 filled: true,

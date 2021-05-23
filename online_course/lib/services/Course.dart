@@ -132,14 +132,19 @@ class Course extends DioCustomClass {
   }
 
   //Lấy danh sách đánh giá của khoá học
-  Future<Map<String, dynamic>> getCourseRatings({required String courseId, String userId = "default"}) async {
+  Future<Map<String, dynamic>> getCourseRatings(
+      {required String courseId, String userId = "default"}) async {
     try {
-       String apiEndpoint = "/get-course-detail/$courseId/$userId";
-       print("endpoint text $apiEndpoint");
-       Response response = await this.dioGetterSetter.get(apiEndpoint);
-       Map<String, dynamic> result = response.data;
-       Map<String, dynamic> ratings = result["payload"]["ratings"];
-       return ratings;
+      String apiEndpoint = "/get-course-detail/$courseId/$userId";
+      print("endpoint text $apiEndpoint");
+      Response response = await this.dioGetterSetter.get(apiEndpoint);
+      Map<String, dynamic> result = response.data;
+      Map<String, dynamic> ratings = result["payload"]["ratings"];
+      Map<String, dynamic> instructor = result["payload"]["instructor"];
+      return {
+        "ratings": ratings,
+        "instructor": instructor,
+      };
     } catch (e) {
       throw e;
     }
